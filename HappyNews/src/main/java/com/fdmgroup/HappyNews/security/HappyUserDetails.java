@@ -67,7 +67,7 @@ public class HappyUserDetails implements UserDetails{
 	}
 	
 	// need for receiving data of authenticated user
-		public HappyUser getSingleUser() {
+		public HappyUser getHappyUser() {
 			return this.happyUser;
 		}
 
