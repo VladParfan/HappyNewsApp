@@ -9,6 +9,9 @@ public class HappyNewsApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(HappyNewsApplication.class, args);
         System.out.println("hello world");
+	System.out.println("zaczynamy projekt");
+	
+	
 	}
 
 }
