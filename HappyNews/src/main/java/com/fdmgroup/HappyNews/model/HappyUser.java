@@ -27,17 +27,15 @@ public class HappyUser {
 		super();
 	}
 	
-	public HappyUser(Long id, String username, String email, String password) {
-		super();
-		this.id = id;
+	public HappyUser(String username, String email, String password) {
+		
 		this.username = username;
 		this.email = email;
 		this.password = password;
 	}
 
-	public HappyUser(Long id, String username, String email, String password, String role) {
-		super();
-		this.id = id;
+	public HappyUser(String username, String email, String password, String role) {
+		
 		this.username = username;
 		this.email = email;
 		this.password = password;
