@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.fdmgroup.HappyNews.model.HappyUser;
 import com.fdmgroup.HappyNews.security.HappyUserDetails;
 
 @Controller
@@ -18,10 +19,8 @@ public class MainController {
 
 	@GetMapping("/showUserInfo")
 	public String showUserInfo() {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		HappyUserDetails happyUserDetails = (HappyUserDetails) authentication.getPrincipal();
 
-		System.out.println("Current Session user" + happyUserDetails.getHappyUser());
+		System.out.println("Current Session user" + returnUserFromCurrentSession());
 
 		return "hello";
 
@@ -66,6 +65,10 @@ public class MainController {
 	}
 	//--------------- end of footer -----------------
 	
-	
+	public HappyUser returnUserFromCurrentSession() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		HappyUserDetails happyUserDetails = (HappyUserDetails) authentication.getPrincipal();
+		return happyUserDetails.getHappyUser();
+	}
 	
 }
