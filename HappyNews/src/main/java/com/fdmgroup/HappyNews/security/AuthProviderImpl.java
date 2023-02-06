@@ -33,7 +33,7 @@ public class AuthProviderImpl implements AuthenticationProvider{
 		UserDetails userDetails = userService.loadUserByUsername(email);
 		String password = authentication.getCredentials().toString();
 		
-		if(!password.equals(userDetails.getPassword())){
+		if(!hashingPassword(password).equals(userDetails.getPassword())){
 			throw new BadCredentialsException("incorrect password");
 		}
 		
@@ -45,5 +45,9 @@ public class AuthProviderImpl implements AuthenticationProvider{
 		// TODO Auto-generated method stub
 		return true;
 	}
-
+    
+	public String hashingPassword(String password) {
+		Integer hashedPassword = password.hashCode();
+		return hashedPassword.toString();
+	}
 }

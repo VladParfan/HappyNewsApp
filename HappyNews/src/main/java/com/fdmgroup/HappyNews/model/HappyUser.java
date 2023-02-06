@@ -31,14 +31,14 @@ public class HappyUser {
 		
 		this.username = username;
 		this.email = email;
-		this.password = password;
+		this.password = hashingPassword(password);
 	}
 
 	public HappyUser(String username, String email, String password, String role) {
 		
 		this.username = username;
 		this.email = email;
-		this.password = password;
+		this.password = hashingPassword(password);
 		this.role = role;
 	}
 	
@@ -65,7 +65,7 @@ public class HappyUser {
 		return password;
 	}
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = hashingPassword(password);
 	}
 	public String getRole() {
 		return role;
@@ -80,7 +80,12 @@ public class HappyUser {
 				+ ", role=" + role + "]";
 	}
 
-	
+	public String hashingPassword(String password) {
+		Integer hashedPassword = password.hashCode();
+		return hashedPassword.toString();
+		
+				
+	}
 	
 	
 }
