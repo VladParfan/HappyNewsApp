@@ -11,6 +11,7 @@ import com.fdmgroup.HappyNews.model.HappyUser;
 import com.fdmgroup.HappyNews.repository.HappyUserRepository;
 import com.fdmgroup.HappyNews.security.HappyUserDetails;
 
+
 @Service
 public class HappyUserDetailsService implements UserDetailsService{
    private final HappyUserRepository userRepository;
@@ -30,5 +31,16 @@ public UserDetails loadUserByUsername(String email) throws UsernameNotFoundExcep
 	return new HappyUserDetails(happyUserOptional.get());
 }
    
-   
+public UserDetails loadUserByEmailForPasswordChange(String email) throws UsernameNotFoundException {
+	Optional<HappyUser> happyUser = userRepository.findByEmail(email);
+
+	if (happyUser.isPresent()) {
+		return new HappyUserDetails(happyUser.get());
+	}
+	throw new UsernameNotFoundException("User not found");
+}
+
+public void saveUserToDb(HappyUserDetails happyUsDet) {
+	userRepository.save(happyUsDet.getHappyUser());
+}
 }

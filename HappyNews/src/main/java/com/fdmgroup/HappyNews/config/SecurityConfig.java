@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.authorizeRequests()
 		     .antMatchers("/css/**", "/js/**", "/h2/**", "WEB-INF/jsps/**", "/", "/**/*.png", "/**/*.PNG", "/**/*.jpg", "/**/*.JPG", "/register", "/goRegisterPage", "/goQuestionPassword", "/questionPassword", "/resetPassword", "/goToSearchingPage", "/goToFAQ", "/sendMessageToAdmin", "/toPrivacyPolicy", "/toTermsAndConditions", "/goShowProductsOfUser/{username}", "/showOtherUserProfile/{username}", "/goToProductPage/{productId}", "/goToCategory/{category}", "/login", "/toContact", "/toAboutShazar", "/filtered").permitAll()
 			.antMatchers("/auth/admin").hasRole("ADMIN")
-			.antMatchers("/auth/login","/error","/auth/registration").permitAll()
+			.antMatchers("/auth/login","/error","/auth/registration","/auth/change-password").permitAll()
 			.anyRequest().hasAnyRole("USER","ADMIN")
 			.and()
 			.formLogin().loginPage("/auth/login")
