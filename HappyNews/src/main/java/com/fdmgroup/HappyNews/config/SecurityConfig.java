@@ -33,6 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			
 		http.csrf().disable()
 		.authorizeRequests()
+		     .antMatchers("/css/**", "/js/**", "/h2/**", "WEB-INF/jsps/**", "/", "/**/*.png", "/**/*.PNG", "/**/*.jpg", "/**/*.JPG", "/register", "/goRegisterPage", "/goQuestionPassword", "/questionPassword", "/resetPassword", "/goToSearchingPage", "/goToFAQ", "/sendMessageToAdmin", "/toPrivacyPolicy", "/toTermsAndConditions", "/goShowProductsOfUser/{username}", "/showOtherUserProfile/{username}", "/goToProductPage/{productId}", "/goToCategory/{category}", "/login", "/toContact", "/toAboutShazar", "/filtered").permitAll()
 			.antMatchers("/auth/admin").hasRole("ADMIN")
 			.antMatchers("/auth/login","/error","/auth/registration").permitAll()
 			.anyRequest().hasAnyRole("USER","ADMIN")
@@ -44,7 +45,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.and()
 			.logout()
 			.logoutUrl("/logout")
-			.logoutSuccessUrl("/auth/login");
+			.logoutSuccessUrl("/auth/login")
+			.invalidateHttpSession(true)
+			.deleteCookies("JSESSIONID")
+			.and()
+		.csrf()
+			.disable()	
+		.httpBasic()
+			.and()
+		.headers().frameOptions().disable();
 	}
 	
 	@Override
