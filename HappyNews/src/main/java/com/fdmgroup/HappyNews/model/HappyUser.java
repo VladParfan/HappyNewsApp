@@ -22,6 +22,8 @@ public class HappyUser {
 	private String password;
 	@Column(name="role")
 	private String role;
+	@Column(name="petName")
+	private String petName;
 	
 	public HappyUser() {
 		super();
@@ -34,12 +36,13 @@ public class HappyUser {
 		this.password = hashingPassword(password);
 	}
 
-	public HappyUser(String username, String email, String password, String role) {
+	public HappyUser(String username, String email, String password, String role, String petName) {
 		
 		this.username = username;
 		this.email = email;
 		this.password = hashingPassword(password);
 		this.role = role;
+		this.petName=petName;
 	}
 	
 	
@@ -72,6 +75,16 @@ public class HappyUser {
 	}
 	public void setRole(String role) {
 		this.role = role;
+	}
+	
+	
+
+	public String getPetName() {
+		return petName;
+	}
+
+	public void setPetName(String petName) {
+		this.petName = petName;
 	}
 
 	@Override

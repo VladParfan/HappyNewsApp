@@ -72,5 +72,9 @@ public class HappyUserDetails implements UserDetails{
 		public HappyUser getHappyUser() {
 			return this.happyUser;
 		}
+		
+	public String getPetName() {
+		return this.happyUser.getPetName();
+	}
 
 }

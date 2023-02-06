@@ -87,4 +87,27 @@ public class AuthController {
 			}
 			return "redirect:/auth/login";	
 	}
+	
+	
+	@GetMapping("/recover-password")
+	public String recoverPasswordPage(@ModelAttribute("happyUser") HappyUser happyUser) {
+			
+			return "auth/recoverPassword";
+		}
+		
+	@PostMapping("/recover-password")
+	public String recoverPassword(@RequestParam("email") String email,@RequestParam("petName") String petName, @RequestParam("newPassword") String newPassword) {
+			
+			UserDetails userDetails = userDetailsService.loadUserByEmailForPasswordChange(email);
+			HappyUserDetails happyUserDetails1 = (HappyUserDetails) userDetails;
+			if(happyUserDetails1.getPetName().equals(petName)) {
+			    happyUserDetails1.setPassword(newPassword);
+			    userDetails = (UserDetails) happyUserDetails1;
+			    userDetailsService.saveUserToDb(happyUserDetails1);
+			    
+			}else {
+				System.out.println("password does not match");
+			}
+			return "redirect:/auth/login";	
+	}
 }
