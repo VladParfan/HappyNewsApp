@@ -24,8 +24,8 @@ public class BootsStrapData implements CommandLineRunner {
 		
 		System.out.println("Started in Bootstrap");
 		
-		HappyUser user1 = new HappyUser("vlad", "vlad@email.com", "vlad","ROLE_USER");
-		HappyUser user2 = new HappyUser("Ewa", "ewa@nowak.com", "admin2","ROLE_ADMIN");
+		HappyUser user1 = new HappyUser("vlad", "vlad@email.com", "vlad","ROLE_ADMIN");
+		HappyUser user2 = new HappyUser("Ewa", "ewa@nowak.com", "admin2","ROLE_USER");
 		
 		userRepository.save(user1);
 		userRepository.save(user2);

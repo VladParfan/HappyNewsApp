@@ -37,7 +37,7 @@ public class AuthProviderImpl implements AuthenticationProvider{
 			throw new BadCredentialsException("incorrect password");
 		}
 		
-		return new UsernamePasswordAuthenticationToken(userDetails, password,Collections.emptyList());
+		return new UsernamePasswordAuthenticationToken(userDetails, password,userDetails.getAuthorities());
 	}
 
 	@Override
