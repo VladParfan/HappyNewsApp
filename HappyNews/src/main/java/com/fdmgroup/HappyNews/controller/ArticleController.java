@@ -12,20 +12,6 @@ import com.fdmgroup.HappyNews.security.HappyUserDetails;
 @Controller
 public class ArticleController {
 	
-	@GetMapping("/hello")
-   public String sayHello() {
-	   return "hello";
-   }
 	
-	@GetMapping("/showUserInfo")
-	public String showUserInfo() {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		HappyUserDetails happyUserDetails = (HappyUserDetails)authentication.getPrincipal();
-		
-		System.out.println("Current Session user" + happyUserDetails.getHappyUser());
-		
-		return "hello";
-		
-	}
 	
 }
