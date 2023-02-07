@@ -43,6 +43,7 @@ public class MainController {
 
 	@GetMapping(value= "/")
 	public String getIndex(ModelMap model) {
+		returnUserFromCurrentSession(model);
 		return "index";
 	}
 	
@@ -50,6 +51,7 @@ public class MainController {
 	
 	@GetMapping("/toAboutHappyNews")
 	public String toAboutShazar(ModelMap model) {
+		returnUserFromCurrentSession(model);
 		
 		return "aboutHappyNews";
 	}
@@ -57,24 +59,28 @@ public class MainController {
 	
 	@GetMapping("/goToFAQ")
 	public String toFAQ(ModelMap model) {
+		returnUserFromCurrentSession(model);
 		
 		return "FAQ";
 	}
 	
 	@GetMapping("/toContact")
 	public String toContactUs(ModelMap model) {
+		returnUserFromCurrentSession(model);
 		
 		return "contact";
 	}
 	
 	@GetMapping("/toPrivacyPolicy")
 	public String toPolicy(ModelMap model) {
+		returnUserFromCurrentSession(model);
 		
 		return "privacy";
 	}
 	
 	@GetMapping("/toTermsAndConditions")
 	public String toTermsAndConditions(ModelMap model) {
+		returnUserFromCurrentSession(model);
 		
 		return "termsCondition";
 	}

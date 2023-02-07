@@ -14,23 +14,40 @@
 
 	<header>
 		<div>
-			<a href="/">Home</a>
+			
 		</div>
-
-
-
-
-
 <!----------- menu bar with categories --------------->
 		<div class="menu-categories">
-			<a href="/toPeople">People</a> 
+		<c:choose>
+		<c:when test="${loggedIn == true}">
+		<a>You are logged in as ${user.username}</a>
+		<a href="/logout">Logout</a>
+		<a href="/showProfile">See Profile</a>
+		
+		</c:when>
+		<c:otherwise>
+		      		<a href="/login">Login</a>
+		      		<a href="/registration">Register</a>
+			<!-- <a href="/login">People</a> 
+			<a href="/login">Culture</a>
+			<a href="/login">Environment</a> 
+			<a href="/login">Science</a>
+			<a href="/login">Economics</a> 
+			<a href="/login">Lifestyle</a> -->
+			
+			</c:otherwise>
+				</c:choose>
+		</div>
+		<div>
+		
+            <a href="/toPeople">People</a> 
 			<a href="/toCulture">Culture</a>
 			<a href="/toEnvironment">Environment</a> 
 			<a href="/toScience">Science</a>
 			<a href="/toEconomics">Economics</a> 
 			<a href="/toLifestyle">Lifestyle</a>
-		</div>
-
+			<a href="/">Home</a>
+			</div>
 	</header>
 
 

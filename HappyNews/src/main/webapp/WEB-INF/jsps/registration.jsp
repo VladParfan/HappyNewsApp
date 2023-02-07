@@ -13,38 +13,21 @@
 <body>
 
 <jsp:include page="header.jsp" />
+<h1>REGISTER</h1>
+<span style="color: red">${errorMessage}</span>
 
-<form  method="post" action="@{/auth/registration}" th:object="${happyUser}">
-				 <h1>REGISTER</h1>
-				 <div class="input">
-					 <p>Name:</p>
-					 <input type="text" name="username" id="username" required/>
-					 
-				 </div>
-				 <div class="input">
-					 <p>Email:</p>
-					 <input type="email" name="email">
-					 <div style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"> Email error </div>
-				 </div>
-				 <div class="input">
-					 <p>Password:</p>
-					 <input type="password" name="password" th:field="*{password}" id="password">
-				 </div>
-				 <div class="input">
-					 <p>Confirm password:</p>
-					 <input type="password" name="passwordConfirmation" id="confirm_password">
-					 <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"> Password error </div>
-				 </div>
-				 <div class="center">
-				 	<input class="button" type="submit" value="Create account">
-				 </div>
-				 <div class="register">
-				 	<a th:href="@{/auth/login}">Login</a>
-				 </div>
+<br>
+	<form action="/registration" method="post">
+		Username: <input type="text" name="username" required /><br>
+		Password: <input type="password" name="password" required /><br>
+		Email: <input type="email" name="email" required />
+		<br> Question for reseting password: <br> What is your
+		favourite pet name? <br> <input type="text" name="answerQuestion"
+			required /><br> <input type="submit" value="Submit">
+	</form>
 
-
-
-
+<br>
+	<br>
 
 <jsp:include page="footer.jsp" />
 

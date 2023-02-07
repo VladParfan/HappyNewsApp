@@ -29,12 +29,12 @@
 			<input class="button" type="submit" value="Log in">
 		</div>
 		<div>
-			<a href="/auth/registration">Register</a>
+			<a href="/registration">Register</a>
 		</div>
 		<div>
-			<a href="/auth/recover-password">Reset password</a>
+			<a href="/recover-password">Reset password</a>
 		</div>
-
+		</form>
 
 
 
