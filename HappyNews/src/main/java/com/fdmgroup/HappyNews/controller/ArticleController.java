@@ -91,9 +91,17 @@ public class ArticleController {
 		articleService.saveArticle(article);
 		model.addAttribute("article", article);
 		
-		
 		return "article";
 
 	}
 
+	@GetMapping("/deleteArticle")
+	public String deleteArticle (ModelMap model, @RequestParam Integer articleId) {
+		maincontroller.returnUserFromCurrentSession(model);
+		Article article = articleService.findByArticleId(articleId);
+		articleService.deleteArticle(article);
+		
+		return "index";
+	}
+	
 }
