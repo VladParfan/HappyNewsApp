@@ -40,23 +40,24 @@ public class Article {
 		
 	}
 
-
-	public Article(String title, String articleText, LocalDate date, String location, HappyUser happyUser, boolean status,
-			String category) {
+	
+	public Article(String title, String articleText, LocalDate publicationDate, String location, HappyUser author, String category) {
 		super();
 		this.title = title;
 		this.articleText = articleText;
-		this.publicationDate = date;
+		this.publicationDate = publicationDate;
 		this.location = location;
-		this.author = happyUser;
-		this.status = status;
+		this.author = author;
 		this.category = category;
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
 	public String getTitle() {
 		return title;
 	}

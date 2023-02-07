@@ -1,17 +1,79 @@
 package com.fdmgroup.HappyNews.controller;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fdmgroup.HappyNews.model.Article;
 import com.fdmgroup.HappyNews.model.HappyUser;
+import com.fdmgroup.HappyNews.repository.ArticleRepository;
 import com.fdmgroup.HappyNews.security.HappyUserDetails;
+import com.fdmgroup.HappyNews.service.ArticleService;
+import com.fdmgroup.HappyNews.service.HappyUserDetailsService;
 
 @Controller
 public class ArticleController {
+
+	@Autowired
+	ArticleRepository articleRepository;
+
+	@Autowired
+	ArticleService articleService;
+
+	@Autowired
+	MainController maincontroller;
+
+	@Autowired
+	HappyUserDetailsService happyUserService;
+
+	@GetMapping(value = "/goToArticlePage/{articleId}")
+	public String goToArticlePage(ModelMap model, @PathVariable int articleId) {
+		maincontroller.returnUserFromCurrentSession(model);
+
+		Article article = articleService.findByArticleId(articleId);
+		return "article";
+
+	}
 	
+	
+	@GetMapping(value = "/goToAddArticle")
+	public String goToAddArticle (ModelMap model) {
+		maincontroller.returnUserFromCurrentSession(model);
+		return "addArticle";
+	}
+	
+	
+	@PostMapping("/addArticle")
+	public String addArticle(ModelMap model, @RequestParam String title, @RequestParam String articleText, @RequestParam String location, @RequestParam String author, @RequestParam String category) {
+		maincontroller.returnUserFromCurrentSession(model);
+		HappyUser user = happyUserService.findUserByName(author);
+		
+		LocalDate publicationDate = LocalDate.now();
+		Article newArticle = new Article (title, articleText, publicationDate, location, user, category);
+		articleService.createArticle(newArticle);
+		
+		return "article-confirmation";
+	}
+	
+//	@GetMapping(value= "/goToEditArticle/{articleId}")
+	
+	
+	
+	
+//	@PostMapping("/editArticle")
+//	public String editProduct (ModelMap model, @RequestParam String title, @RequestParam String articleText, @RequestParam String location, @RequestParam String author, @RequestParam String category) {
+//		
+//	}
 	
 	
 }
