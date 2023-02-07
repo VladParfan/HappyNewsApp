@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+import org.springframework.ui.ModelMap;
 
 import com.fdmgroup.HappyNews.repository.HappyUserRepository;
 import com.fdmgroup.HappyNews.service.HappyUserDetailsService;
@@ -19,6 +20,7 @@ import com.fdmgroup.HappyNews.service.HappyUserDetailsService;
 public class AuthProviderImpl implements AuthenticationProvider{
 	
 	private final HappyUserDetailsService userService;
+	
 	
 	
 	@Autowired

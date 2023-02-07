@@ -24,16 +24,8 @@ public class RegistrationService {
 	
 	@Transactional
 	public void register(HappyUser happyUser) {
-		Optional<HappyUser> optional = userRepository.findByEmail(happyUser.getEmail());
-		
-		if(!optional.isPresent()) {
 			happyUser.setRole("ROLE_USER");
 			userRepository.save(happyUser);
-		}else {
-			System.out.println("user exist!!!   We shoud add this message to the front end ");
-		}
-		
-		
 	}
 	
 }

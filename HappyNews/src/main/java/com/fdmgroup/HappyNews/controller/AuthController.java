@@ -1,10 +1,14 @@
 package com.fdmgroup.HappyNews.controller;
 
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fdmgroup.HappyNews.model.HappyUser;
+import com.fdmgroup.HappyNews.repository.HappyUserRepository;
 import com.fdmgroup.HappyNews.security.HappyUserDetails;
 import com.fdmgroup.HappyNews.service.HappyUserDetailsService;
 import com.fdmgroup.HappyNews.service.RegistrationService;
@@ -22,13 +27,16 @@ import com.fdmgroup.HappyNews.util.HappyUserValidator;
 @Controller
 
 public class AuthController {
+			private final HappyUserRepository userRepository;
 			private final HappyUserValidator happyUserValidator;
 			private final  RegistrationService registrationService;
 			private final HappyUserDetailsService userDetailsService;
 			
+			
 		@Autowired	
-	public AuthController(HappyUserValidator happyUserValidator, RegistrationService registrationService,HappyUserDetailsService userDetailsService) {
+	public AuthController(HappyUserValidator happyUserValidator, HappyUserRepository userRepository,RegistrationService registrationService,HappyUserDetailsService userDetailsService) {
 				super();
+				this.userRepository = userRepository;;
 				this.happyUserValidator = happyUserValidator;
 				this.registrationService = registrationService;
 				this.userDetailsService = userDetailsService;
@@ -40,19 +48,29 @@ public class AuthController {
 		return "login";
 	}
 	
+	@GetMapping("/login-error") 
+	public String loginError(ModelMap model) {
+		
+		model.addAttribute("errorMessage", "Invalid username or password");
+		
+		return "login";
+	}
+	
 	
 	@GetMapping("/registration")
 	public String registrationPage(@ModelAttribute("happyUser") HappyUser happyUser) {
-		return "auth/registration";
+		return "registration";
 	}
 	
 	@PostMapping("/registration")
-	public String performRegistration(@ModelAttribute("happyUser") @Valid HappyUser happyUser, BindingResult bindingResult) {
-	 happyUserValidator.validate(happyUser, bindingResult);
+	public String performRegistration(@ModelAttribute("happyUser") HappyUser happyUser,ModelMap model) {
 	 
-	 if(bindingResult.hasErrors()) {
-		 return "/auth/registration";
-	 }
+	 HappyUser userFromDatabase = userDetailsService.findUserByName(happyUser.getUsername());
+	 if (userFromDatabase.getUsername().equals(happyUser.getUsername()) || happyUser.getUsername().equals("anonymousUser")) {
+			model.addAttribute("errorMessage", "This user name already exists");
+			return "registration";
+		}
+	 
 	 registrationService.register(happyUser);
 	 
 	 return "redirect:/login";
@@ -62,52 +80,97 @@ public class AuthController {
 	@GetMapping("/admin")
 	public String adminPage()
 	{
-		return "auth/admin";
+		return "admin";
 	}
 	
 	@GetMapping("/change-password")
 	public String changePasswordPage(@ModelAttribute("happyUser") HappyUser happyUser) {
 			
-			return "auth/changePassword";
+			return "changePassword";
 		}
 		
 	@PostMapping("/change-password")
-	public String changePassword(@RequestParam("email") String email,@RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword) {
-			Integer hashedOldPassword = oldPassword.hashCode();
+	public String changePassword(@RequestParam("currentPassword") String currentPassword, @RequestParam("newPassword") String newPassword,@RequestParam("confirmNewPassword") String confirmNewPassword,ModelMap model) {
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		HappyUser user = userDetailsService.findUserByName(username);
+		
+		Integer hashedOldPassword = currentPassword.hashCode();
 			String hashedOldPasswordString = hashedOldPassword.toString();
-			UserDetails userDetails = userDetailsService.loadUserByEmailForPasswordChange(email);
+			UserDetails userDetails = userDetailsService.loadUserByEmailForPasswordChange(user.getEmail());
 			HappyUserDetails happyUserDetails1 = (HappyUserDetails) userDetails;
+			
+			
+			if(!newPassword.equals(confirmNewPassword)) {
+				model.addAttribute("errorMessage","New password and Cofirm password does not match");
+				return "changePassword";
+			}
+			
+			
+			 if(currentPassword.equals(newPassword)) {
+				 model.addAttribute("errorMessage","current password and new password are the same");
+					return "changePassword";
+			 }
 			if(userDetails.getPassword().equals(hashedOldPasswordString)) {
 			    happyUserDetails1.setPassword(newPassword);
 			    userDetails = (UserDetails) happyUserDetails1;
 			    userDetailsService.saveUserToDb(happyUserDetails1);
 			    
 			}else {
-				System.out.println("password does not match");
+				model.addAttribute("errorMessage","Current password does not match");
+				return "changePassword";
 			}
-			return "redirect:/login";	
+			return "index";	
 	}
 	
 	
 	@GetMapping("/recover-password")
-	public String recoverPasswordPage(@ModelAttribute("happyUser") HappyUser happyUser) {
+	public String recoverPasswordPage(/*@ModelAttribute("happyUser") HappyUser happyUser*/) {
 			
-			return "auth/recoverPassword";
+			return "recoverPassword";
 		}
 		
 	@PostMapping("/recover-password")
-	public String recoverPassword(@RequestParam("email") String email,@RequestParam("petName") String petName, @RequestParam("newPassword") String newPassword) {
-			
-			UserDetails userDetails = userDetailsService.loadUserByEmailForPasswordChange(email);
-			HappyUserDetails happyUserDetails1 = (HappyUserDetails) userDetails;
-			if(happyUserDetails1.getPetName().equals(petName)) {
-			    happyUserDetails1.setPassword(newPassword);
-			    userDetails = (UserDetails) happyUserDetails1;
-			    userDetailsService.saveUserToDb(happyUserDetails1);
-			    
+	public String recoverPassword(@RequestParam("email") String email,@RequestParam("petName") String petName,@RequestParam("newPassword") String newPassword, @RequestParam("confirmNewPassword") String confirmNewPassword, ModelMap model) {
+			Optional<HappyUser> optional = userRepository.findByEmail(email);
+			if(optional.isEmpty()) {
+				model.addAttribute("errorMessage","User does'not exist");
+				return "recoverPassword";
 			}else {
-				System.out.println("password does not match");
+				UserDetails userDetails = userDetailsService.loadUserByEmailForPasswordChange(email);
+				HappyUserDetails happyUserDetails1 = (HappyUserDetails) userDetails;
+				if(happyUserDetails1.getPetName().equals(petName)) {
+					
+					if(newPassword.equals(confirmNewPassword)) {
+						happyUserDetails1.setPassword(newPassword);
+					    userDetails = (UserDetails) happyUserDetails1;
+					    userDetailsService.saveUserToDb(happyUserDetails1);
+					}else {
+						model.addAttribute("errorMessage", "Pssword doesn't match");
+						return "recoverPassword";
+					}
+				    
+				    
+				}else {
+					model.addAttribute("errorMessage","Pet Name does not match");
+					return "recoverPassword";
+				}
 			}
+			
 			return "redirect:/login";	
+	}
+	
+	public void returnUserFromCurrentSession(ModelMap model) {
+		//Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		//HappyUserDetails happyUserDetails = (HappyUserDetails) authentication.getPrincipal();
+		//return happyUserDetails.getHappyUser();
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();	
+		System.out.println("Username: " + username);	
+		if(username.equals("anonymousUser")) {
+			model.addAttribute("loggedIn", false);
+		} else {
+			model.addAttribute("loggedIn", true);
+			HappyUser user = userDetailsService.findUserByName(username);
+			model.addAttribute("user", user);
+		}
 	}
 }

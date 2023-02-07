@@ -12,6 +12,7 @@ public class HappyNewsApplication {
 	System.out.println("zaczynamy projekt");
 	
 	
+	
 	}
 
 }
