@@ -5,6 +5,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -30,6 +31,7 @@ public class AuthController {
 			private final HappyUserValidator happyUserValidator;
 			private final  RegistrationService registrationService;
 			private final HappyUserDetailsService userDetailsService;
+			
 			
 		@Autowired	
 	public AuthController(HappyUserValidator happyUserValidator, HappyUserRepository userRepository,RegistrationService registrationService,HappyUserDetailsService userDetailsService) {
@@ -88,20 +90,36 @@ public class AuthController {
 		}
 		
 	@PostMapping("/change-password")
-	public String changePassword(@RequestParam("email") String email,@RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword) {
-			Integer hashedOldPassword = oldPassword.hashCode();
+	public String changePassword(@RequestParam("currentPassword") String currentPassword, @RequestParam("newPassword") String newPassword,@RequestParam("confirmNewPassword") String confirmNewPassword,ModelMap model) {
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		HappyUser user = userDetailsService.findUserByName(username);
+		
+		Integer hashedOldPassword = currentPassword.hashCode();
 			String hashedOldPasswordString = hashedOldPassword.toString();
-			UserDetails userDetails = userDetailsService.loadUserByEmailForPasswordChange(email);
+			UserDetails userDetails = userDetailsService.loadUserByEmailForPasswordChange(user.getEmail());
 			HappyUserDetails happyUserDetails1 = (HappyUserDetails) userDetails;
+			
+			
+			if(!newPassword.equals(confirmNewPassword)) {
+				model.addAttribute("errorMessage","New password and Cofirm password does not match");
+				return "changePassword";
+			}
+			
+			
+			 if(currentPassword.equals(newPassword)) {
+				 model.addAttribute("errorMessage","current password and new password are the same");
+					return "changePassword";
+			 }
 			if(userDetails.getPassword().equals(hashedOldPasswordString)) {
 			    happyUserDetails1.setPassword(newPassword);
 			    userDetails = (UserDetails) happyUserDetails1;
 			    userDetailsService.saveUserToDb(happyUserDetails1);
 			    
 			}else {
-				System.out.println("password does not match");
+				model.addAttribute("errorMessage","Current password does not match");
+				return "changePassword";
 			}
-			return "redirect:/login";	
+			return "index";	
 	}
 	
 	
@@ -139,5 +157,20 @@ public class AuthController {
 			}
 			
 			return "redirect:/login";	
+	}
+	
+	public void returnUserFromCurrentSession(ModelMap model) {
+		//Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		//HappyUserDetails happyUserDetails = (HappyUserDetails) authentication.getPrincipal();
+		//return happyUserDetails.getHappyUser();
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();	
+		System.out.println("Username: " + username);	
+		if(username.equals("anonymousUser")) {
+			model.addAttribute("loggedIn", false);
+		} else {
+			model.addAttribute("loggedIn", true);
+			HappyUser user = userDetailsService.findUserByName(username);
+			model.addAttribute("user", user);
+		}
 	}
 }
