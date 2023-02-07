@@ -9,6 +9,17 @@
 <title>Insert title here</title>
 </head>
 <body>
+<jsp:include page="header.jsp" />
+<div>
 
+<span style="color: red">${errorMessage}</span>
+			
+
+
+
+
+
+
+<jsp:include page="footer.jsp" />
 </body>
 </html>

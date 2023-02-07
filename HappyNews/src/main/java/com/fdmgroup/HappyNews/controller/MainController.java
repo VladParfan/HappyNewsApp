@@ -11,6 +11,12 @@ import com.fdmgroup.HappyNews.security.HappyUserDetails;
 @Controller
 public class MainController {
 
+	
+	/*
+	 * @GetMapping("/login") public String loginPage() { return "login"; }
+	 */
+	
+	
 	@GetMapping("/hello")
 	public String sayHello() {
 		return "hello";
@@ -23,7 +29,7 @@ public class MainController {
 
 		System.out.println("Current Session user" + happyUserDetails.getHappyUser());
 
-		return "hello";
+		return "login";
 
 	}
 

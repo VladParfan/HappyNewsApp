@@ -20,7 +20,7 @@ import com.fdmgroup.HappyNews.util.HappyUserValidator;
 
 
 @Controller
-@RequestMapping("/auth")
+
 public class AuthController {
 			private final HappyUserValidator happyUserValidator;
 			private final  RegistrationService registrationService;
@@ -37,7 +37,7 @@ public class AuthController {
 
 	@GetMapping("/login")
 	public String loginPage() {
-		return "auth/login";
+		return "login";
 	}
 	
 	
@@ -55,7 +55,7 @@ public class AuthController {
 	 }
 	 registrationService.register(happyUser);
 	 
-	 return "redirect:/auth/login";
+	 return "redirect:/login";
 	 
 	}
 	
@@ -85,7 +85,7 @@ public class AuthController {
 			}else {
 				System.out.println("password does not match");
 			}
-			return "redirect:/auth/login";	
+			return "redirect:/login";	
 	}
 	
 	
@@ -108,6 +108,6 @@ public class AuthController {
 			}else {
 				System.out.println("password does not match");
 			}
-			return "redirect:/auth/login";	
+			return "redirect:/login";	
 	}
 }
