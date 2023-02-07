@@ -41,39 +41,59 @@ public class ArticleController {
 		maincontroller.returnUserFromCurrentSession(model);
 
 		Article article = articleService.findByArticleId(articleId);
+		model.addAttribute("article", article);
 		return "article";
 
 	}
-	
-	
+
 	@GetMapping(value = "/goToAddArticle")
-	public String goToAddArticle (ModelMap model) {
+	public String goToAddArticle(ModelMap model) {
 		maincontroller.returnUserFromCurrentSession(model);
+
 		return "addArticle";
 	}
-	
-	
+
 	@PostMapping("/addArticle")
-	public String addArticle(ModelMap model, @RequestParam String title, @RequestParam String articleText, @RequestParam String location, @RequestParam String author, @RequestParam String category) {
+	public String addArticle(ModelMap model, @RequestParam String title, @RequestParam String articleText,
+			@RequestParam String location, @RequestParam String author, @RequestParam String category) {
 		maincontroller.returnUserFromCurrentSession(model);
 		HappyUser user = happyUserService.findUserByName(author);
-		
+
 		LocalDate publicationDate = LocalDate.now();
-		Article newArticle = new Article (title, articleText, publicationDate, location, user, category);
-		articleService.createArticle(newArticle);
-		
+		Article newArticle = new Article(title, articleText, publicationDate, location, user, category);
+		articleService.saveArticle(newArticle);
+
 		return "article-confirmation";
 	}
-	
-//	@GetMapping(value= "/goToEditArticle/{articleId}")
-	
-	
-	
-	
-//	@PostMapping("/editArticle")
-//	public String editProduct (ModelMap model, @RequestParam String title, @RequestParam String articleText, @RequestParam String location, @RequestParam String author, @RequestParam String category) {
-//		
-//	}
-	
-	
+
+	@GetMapping(value = "/goToEditArticle/{articleId}")
+	public String goToEditArticle(ModelMap model, @PathVariable int articleId) {
+		maincontroller.returnUserFromCurrentSession(model);
+		Article article = articleService.findByArticleId(articleId);
+		model.addAttribute("article", article);
+
+		return "editArticle";
+
+	}
+
+	@PostMapping("/editArticle")
+	public String editProduct(ModelMap model, @RequestParam String title, @RequestParam String articleText,
+			@RequestParam String location, @RequestParam String author, @RequestParam String category, @RequestParam Integer articleId) {
+
+		maincontroller.returnUserFromCurrentSession(model);
+		Article article = articleService.findByArticleId(articleId);
+		
+		article.setTitle(title);
+		article.setArticleText(articleText);
+		article.setLocation(location);
+		article.setCategory(category);
+		
+		articleService.saveArticle(article);
+		model.addAttribute("article", article);
+		
+		
+		return "article";
+
+	}
+
 }

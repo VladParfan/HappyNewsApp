@@ -6,18 +6,20 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Article</title>
 <c:url value="/css/style.css" var="jstlCss" />
 <link href="${jstlCss}" rel="stylesheet">
 </head>
 <body>
 
 <jsp:include page="header.jsp" />
-
-
-to jest strona artykulu 
-
-
+as
+<h2>${article.title}</h2><br>
+${article.articleText}<br>
+Date: ${article.publicationDate}<br>
+Location: ${article.location}<br>
+Author: ${article.author.username}
+Category: ${article.category}
 <jsp:include page="footer.jsp" />
 
 

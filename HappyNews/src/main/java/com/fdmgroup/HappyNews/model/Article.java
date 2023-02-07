@@ -19,6 +19,7 @@ public class Article {
 	
 	private String title;
 	
+	@Column(name="article_text", length=1900)
 	private String articleText;
 	
 	private LocalDate publicationDate;
@@ -52,67 +53,75 @@ public class Article {
 	}
 
 
-
-
-
-
-
-
 	public String getTitle() {
 		return title;
 	}
+
 
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
-	public String getText() {
+
+	public String getArticleText() {
 		return articleText;
 	}
 
-	public void setText(String text) {
-		this.articleText = text;
+
+	public void setArticleText(String articleText) {
+		this.articleText = articleText;
 	}
 
-	public LocalDate getDate() {
+
+	public LocalDate getPublicationDate() {
 		return publicationDate;
 	}
 
-	public void setDate(LocalDate date) {
-		this.publicationDate = date;
+
+	public void setPublicationDate(LocalDate publicationDate) {
+		this.publicationDate = publicationDate;
 	}
+
 
 	public String getLocation() {
 		return location;
 	}
 
+
 	public void setLocation(String location) {
 		this.location = location;
 	}
 
-	public HappyUser getUser() {
+
+	public HappyUser getAuthor() {
 		return author;
 	}
 
-	public void setUser(HappyUser user) {
-		this.author = user;
+
+	public void setAuthor(HappyUser author) {
+		this.author = author;
 	}
+
 
 	public boolean isStatus() {
 		return status;
 	}
 
+
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
+
 
 	public String getCategory() {
 		return category;
 	}
 
+
 	public void setCategory(String category) {
 		this.category = category;
 	}
+
 
 	public int getArticleId() {
 		return articleId;
@@ -125,6 +134,13 @@ public class Article {
 				+ ", publicationDate=" + publicationDate + ", location=" + location + ", author=" + author + ", status="
 				+ status + ", category=" + category + "]";
 	}
+
+
+
+
+
+
+
 
 	
 	
