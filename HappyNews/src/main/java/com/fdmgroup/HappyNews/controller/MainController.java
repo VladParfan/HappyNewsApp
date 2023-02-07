@@ -1,18 +1,27 @@
 package com.fdmgroup.HappyNews.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-
 import com.fdmgroup.HappyNews.model.HappyUser;
 import com.fdmgroup.HappyNews.security.HappyUserDetails;
+import com.fdmgroup.HappyNews.service.HappyUserDetailsService;
 
 @Controller
 public class MainController {
 
+	@Autowired
+	private final HappyUserDetailsService happyUserDetailsService;
 	
+	
+	public MainController(HappyUserDetailsService happyUserDetailsService) {
+		super();
+		this.happyUserDetailsService = happyUserDetailsService;
+	}
+
 	/*
 	 * @GetMapping("/login") public String loginPage() { return "login"; }
 	 */
@@ -24,9 +33,9 @@ public class MainController {
 	}
 
 	@GetMapping("/showUserInfo")
-	public String showUserInfo() {
+	public String showUserInfo(ModelMap model) {
 
-		System.out.println("Current Session user" + returnUserFromCurrentSession());
+		returnUserFromCurrentSession(model);
 
 		return "login";
 
@@ -71,10 +80,19 @@ public class MainController {
 	}
 	//--------------- end of footer -----------------
 	
-	public HappyUser returnUserFromCurrentSession() {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		HappyUserDetails happyUserDetails = (HappyUserDetails) authentication.getPrincipal();
-		return happyUserDetails.getHappyUser();
+	public void returnUserFromCurrentSession(ModelMap model) {
+		//Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		//HappyUserDetails happyUserDetails = (HappyUserDetails) authentication.getPrincipal();
+		//return happyUserDetails.getHappyUser();
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();	
+		System.out.println("Username: " + username);	
+		if(username.equals("anonymousUser")) {
+			model.addAttribute("loggedIn", false);
+		} else {
+			model.addAttribute("loggedIn", true);
+			HappyUser user = happyUserDetailsService.findUserByName(username);
+			model.addAttribute("user", user);
+		}
 	}
 	
 }

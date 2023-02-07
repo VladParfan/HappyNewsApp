@@ -29,6 +29,10 @@ public class HappyUser {
 		super();
 	}
 	
+	public HappyUser(String username) {
+		this.username = username;
+	}
+	
 	public HappyUser(String username, String email, String password) {
 		
 		this.username = username;

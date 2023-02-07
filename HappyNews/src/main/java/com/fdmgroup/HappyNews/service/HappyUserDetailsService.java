@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+
 import com.fdmgroup.HappyNews.model.HappyUser;
 import com.fdmgroup.HappyNews.repository.HappyUserRepository;
 import com.fdmgroup.HappyNews.security.HappyUserDetails;
@@ -43,4 +44,12 @@ public UserDetails loadUserByEmailForPasswordChange(String email) throws Usernam
 public void saveUserToDb(HappyUserDetails happyUsDet) {
 	userRepository.save(happyUsDet.getHappyUser());
 }
+
+     public HappyUser findUserByName(String name) {
+    	 Optional<HappyUser> optional = userRepository.findByUsername(name);
+    	 HappyUser user = optional.orElse(new HappyUser("default username"));
+ 		
+ 		return user;
+    			 
+     }
 }
