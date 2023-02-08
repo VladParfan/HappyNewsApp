@@ -101,4 +101,12 @@ public class MainController {
 		}
 	}
 	
+	public HappyUser currentUserObject(ModelMap model) {
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();	
+			HappyUser user = happyUserDetailsService.findUserByName(username);
+			return user;
+		
+		
+	}
+	
 }

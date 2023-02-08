@@ -9,4 +9,4 @@ import com.fdmgroup.HappyNews.model.HappyUser;
 public interface HappyUserRepository extends JpaRepository<HappyUser, Long>{
 	Optional<HappyUser> findByUsername(String name);
 	Optional<HappyUser> findByEmail(String email);
-}
+} 

@@ -16,7 +16,7 @@ public class Article {
 	@Column(name="article_ID")
 	private int articleId;
 	
-	
+	 
 	private String title;
 	
 	@Column(name="article_text", length=1900)
@@ -111,6 +111,8 @@ public class Article {
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
+	
+	
 
 
 	public String getCategory() {

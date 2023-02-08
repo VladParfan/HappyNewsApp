@@ -41,6 +41,14 @@ public UserDetails loadUserByEmailForPasswordChange(String email) throws Usernam
 	throw new UsernameNotFoundException("User not found");
 }
 
+public HappyUser findByUsername(String email) {
+	return userRepository.findByEmail(email).get();
+}
+
+
+
+
+
 public void saveUserToDb(HappyUserDetails happyUsDet) {
 	userRepository.save(happyUsDet.getHappyUser());
 }

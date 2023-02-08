@@ -23,6 +23,7 @@
 		<a>You are logged in as ${user.username}</a>
 		<a href="/logout">Logout</a>
 		<a href="/showProfile">See Profile</a>
+		<a href="/goToInbox">Inbox</a>
 		<a href="/goToAddArticle">Add article</a>
 		</c:when>
 		<c:otherwise>
