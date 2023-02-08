@@ -74,7 +74,7 @@ public class CommentController {
 	public String addCommentReply(ModelMap model, @RequestParam Integer articleId, @RequestParam String commentator,
 			@RequestParam String commentText, @RequestParam Integer parentCommentId) {
 		HappyUser user = happyUserService.findUserByName(commentator);
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		LocalDateTime publicationTime = LocalDateTime.now();
 		String formattedDate = publicationTime.format(formatter);
 		Article article = articleService.findByArticleId(articleId);
