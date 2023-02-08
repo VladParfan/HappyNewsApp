@@ -32,7 +32,7 @@
 			
 			<input type="submit" value="Add new article" />
 			
-			</select>
+			
 	</form>
 
 

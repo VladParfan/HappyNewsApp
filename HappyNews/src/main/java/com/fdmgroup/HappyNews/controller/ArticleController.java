@@ -2,6 +2,7 @@ package com.fdmgroup.HappyNews.controller;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -15,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fdmgroup.HappyNews.model.Article;
+import com.fdmgroup.HappyNews.model.Comment;
 import com.fdmgroup.HappyNews.model.HappyUser;
 import com.fdmgroup.HappyNews.repository.ArticleRepository;
 import com.fdmgroup.HappyNews.security.HappyUserDetails;
 import com.fdmgroup.HappyNews.service.ArticleService;
+import com.fdmgroup.HappyNews.service.CommentService;
 import com.fdmgroup.HappyNews.service.HappyUserDetailsService;
 
 @Controller
@@ -35,13 +38,20 @@ public class ArticleController {
 
 	@Autowired
 	HappyUserDetailsService happyUserService;
+	
+	@Autowired
+	
+	CommentService commentService;
 
 	@GetMapping(value = "/goToArticlePage/{articleId}")
 	public String goToArticlePage(ModelMap model, @PathVariable int articleId) {
 		maincontroller.returnUserFromCurrentSession(model);
 
 		Article article = articleService.findByArticleId(articleId);
+		
+		List<Comment> listOfCommentsOfArticle = commentService.listOfCommentsForArticle(article);
 		model.addAttribute("article", article);
+		model.addAttribute("listOfCommentsOfArticle", listOfCommentsOfArticle);
 		return "article";
 
 	}

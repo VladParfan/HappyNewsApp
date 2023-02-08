@@ -1,7 +1,9 @@
 package com.fdmgroup.HappyNews.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,16 +18,22 @@ public class Comment {
 	@Column(name="comment_ID")
 	private int commentId;
 	
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.ALL})
 	HappyUser commentator;
 	
 	@ManyToOne
 	Article article;
 	
-	private LocalDate publicationDate;
+	@ManyToOne
+	Comment parentComment;
+	
+	//private LocalDateTime publicationTime;
+	private String publicationTime;
 	
 	private String commentText;
 
+	
+	
 	
 	public Comment() {
 		super();
@@ -33,19 +41,27 @@ public class Comment {
 	}
 
 
-	public Comment(HappyUser commentator, Article article, LocalDate publicationDate, String commentText) {
+	public Comment(HappyUser commentator, Article article, String publicationTime, String commentText) {
 		super();
 		this.commentator = commentator;
 		this.article = article;
-		this.publicationDate = publicationDate;
+		this.publicationTime = publicationTime;
 		this.commentText = commentText;
 	}
 
+	
+	
+	
 
-	public int getCommentId() {
-		return commentId;
+	public Comment(HappyUser commentator, Article article, Comment parentComment, String publicationTime,
+			String commentText) {
+		super();
+		this.commentator = commentator;
+		this.article = article;
+		this.parentComment = parentComment;
+		this.publicationTime = publicationTime;
+		this.commentText = commentText;
 	}
-
 
 
 	public HappyUser getCommentator() {
@@ -68,13 +84,13 @@ public class Comment {
 	}
 
 
-	public LocalDate getPublicationDate() {
-		return publicationDate;
+	public String getPublicationTime() {
+		return publicationTime;
 	}
 
 
-	public void setPublicationDate(LocalDate publicationDate) {
-		this.publicationDate = publicationDate;
+	public void setPublicationTime(String publicationTime) {
+		this.publicationTime = publicationTime;
 	}
 
 
@@ -88,16 +104,26 @@ public class Comment {
 	}
 
 
+	public int getCommentId() {
+		return commentId;
+	}
+
+
+	public Comment getParentComment() {
+		return parentComment;
+	}
+
+
+	public void setParentComment(Comment parentComment) {
+		this.parentComment = parentComment;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Comment [commentId=" + commentId + ", commentator=" + commentator + ", article=" + article
-				+ ", publicationDate=" + publicationDate + ", commentText=" + commentText + "]";
+				+ ", publicationTime=" + publicationTime + ", commentText=" + commentText + "]";
 	}
-	
-	
 
-	
-	
-	
-	
+
 }
