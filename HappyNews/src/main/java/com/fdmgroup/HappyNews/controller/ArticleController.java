@@ -64,10 +64,10 @@ public class ArticleController {
 	@GetMapping(value = "/goToAddArticle")
 	public String goToAddArticle(ModelMap model) {
 		maincontroller.returnUserFromCurrentSession(model);
-
 		return "addArticle";
 	}
 
+	
 	@PostMapping("/addArticle")
 	public String addArticle(ModelMap model, @RequestParam String title, @RequestParam String articleText,
 			@RequestParam String location, @RequestParam String author, @RequestParam String category) {

@@ -2,10 +2,12 @@ package com.fdmgroup.HappyNews.controller;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,17 +71,71 @@ public class ArticleControllerTest {
 	@WithMockUser
 	public void test_goToArticlePage_return_article() throws Exception{
 		
-		
-		
 		List<Comment> mockListOfCommentsOfArticle = new ArrayList<>();
-		
+	//	Article mockArticle = new Article();
+	
+		when(mockArticleService.findByArticleId(1)).thenReturn(mockArticle);
 		when(mockCommentService.listOfCommentsForArticle(mockArticle)).thenReturn(mockListOfCommentsOfArticle);
 		
-		mockMvc.perform(get("/goToArticlePage/{articleId}")).andExpect(status().isOk());
+		mockMvc.perform(get("/goToArticlePage/1")).andExpect(status().isOk());
 		
-
-
+		//.andExpect(model().attribute("article", mockArticle));
+		//andExpect(model().attribute("listOfCommentsOfArticle", mockListOfCommentsOfArticle));
+		
 
 	}
 
+	@Test
+	@WithMockUser
+	public void test_goToAddArticle_returns_addArticle() throws Exception{
+		
+		when(mockArticleService.findByArticleId(1)).thenReturn(mockArticle);
+		mockMvc.perform(get("/goToAddArticle")).andExpect(view().name("addArticle"));
+		
+	}
+	
+	
+	
+	
+//	@Test
+//	@WithMockUser
+//	public void test_addArticleMethod() throws Exception {
+//		
+//		when(mockArticleService.findByArticleId(1)).thenReturn(mockArticle);
+//		
+//		
+//	}
+	
+	@Test
+	@WithMockUser
+	public void test_goToEditArticle_returnEditArticle() throws Exception {
+		
+		when(mockArticleService.findByArticleId(2)).thenReturn(mockArticle);
+		mockMvc.perform(get("/goToEditArticle/2")).andExpect(view().name("editArticle"));
+		
+	}
+	
+	@Test
+	@WithMockUser
+	public void test_EditArticleMethod_returnArticleView() throws Exception {
+		HappyUser author = new HappyUser();
+		author.setUsername("testauthor");
+		
+		Article article = new Article("testTitle", "testArticleText", LocalDate.of(2023, 2, 9), "testLocation", author, "people" );
+		when(mockArticleService.findByArticleId(2)).thenReturn(mockArticle);
+		//mockMvc.perform(post("/editArticle/").param("title", "testTitle").param("articleText", "testArticleText").param("location", "testLocation").param("author", "testauthor").param("category", "people").param("articleId", "2")).andExpect(status().isOk()).andExpect(model().attribute("article", "article")).andExpect(view().name("article"));
+		
+	}
+	
+	@Test
+	@WithMockUser
+	public void test_deleteArticleMethod_returnArticleView() throws Exception {
+		
+		
+		when(mockArticleService.findByArticleId(2)).thenReturn(mockArticle);
+		mockMvc.perform(get("/deleteArticle/").param("articleId", "2")).andExpect(status().isOk()).andExpect(view().name("index"));
+		
+		
+	}
+	
 }
