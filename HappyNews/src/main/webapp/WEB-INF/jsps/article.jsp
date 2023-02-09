@@ -16,13 +16,12 @@
 <!-- -------------------------------------------------------- -->
 <!-- adding article -->
 
-<h2>${article.title}</h2><br>
-${article.articleText}<br>
-Date: ${article.publicationDate}<br>
-Location: ${article.location}<br>
-Author: ${article.author.username}
-Category: ${article.category}
-
+${article.title}
+      Date: ${article.publicationDate}<br>
+      Location: ${article.location}<br>
+      Author: ${article.author.username}<br>
+      Category: ${article.category}
+ 
 <!-- adding comment -->
 <%-- <form action="/addComment" method="post" >
 
