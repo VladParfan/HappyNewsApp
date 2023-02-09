@@ -29,6 +29,10 @@ public class ArticleService {
 		return articleOpt.orElse(null);
 	}
 	
+	
+	
+	
+	
 	public List<Article> listLatestSixArticles() {
 	    List<Article> articles = articleRepository.findLatestArticles();
 	    int size = articles.size();
@@ -38,5 +42,13 @@ public class ArticleService {
 	    return articles;
 	  }
 	
+	public Optional<Article> findOptionalByArticleId(Integer articleId) {
+		Optional <Article> articleOpt = articleRepository.findById(articleId);
+		return articleOpt;
+	}
+	
+	public List<Article> findALlProducts(){
+		return articleRepository.findAll();
+	}
 	
 }

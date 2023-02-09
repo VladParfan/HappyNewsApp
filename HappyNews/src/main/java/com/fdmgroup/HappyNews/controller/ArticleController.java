@@ -96,7 +96,7 @@ public class ArticleController {
 				requestController.sendArticleForApproval( maincontroller.currentUserObject(model),newArticle);
 				//there shoud be notification to Admin
 			}
-			
+	
 
 	
 		
@@ -144,6 +144,16 @@ public class ArticleController {
 	}
 	
 	
+	
+
+	  public void getLatestArticles(ModelMap model) {
+	    List<Article> latestArticles = articleService.listLatestSixArticles();
+	    model.addAttribute("latestArticles", latestArticles);
+	    
+	  }
+	
+	
+	
 	/*public void messageByFavouriteCategories(Article article) {
 	   List<HappyUser> listOfUser = happyUserRepository.findAll();
 	   
@@ -158,6 +168,9 @@ public class ArticleController {
 	   }
 	   
 	}*/
+	
+	
+	
 	
 	
 }

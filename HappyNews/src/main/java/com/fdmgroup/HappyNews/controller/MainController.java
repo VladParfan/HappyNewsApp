@@ -16,6 +16,10 @@ public class MainController {
 	@Autowired
 	private final HappyUserDetailsService happyUserDetailsService;
 	
+	@Autowired
+	private ArticleController articleController;
+	
+	
 	
 	public MainController(HappyUserDetailsService happyUserDetailsService) {
 		super();
@@ -44,6 +48,9 @@ public class MainController {
 	@GetMapping(value= "/")
 	public String getIndex(ModelMap model) {
 		returnUserFromCurrentSession(model);
+		articleController.getLatestArticles(model);
+		
+		
 		return "index";
 	}
 	

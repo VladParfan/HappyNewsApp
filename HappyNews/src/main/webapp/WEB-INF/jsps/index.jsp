@@ -14,6 +14,18 @@
 
 <span style="color: red">${errorMessage}</span>
 			
+<!-- ========Latest Articles================== -->
+ <h1>Latest Articles</h1>
+  <c:forEach var="article" items="${latestArticles}">
+    <p>
+      <b>${article.title}</b><br>
+      Date: ${article.publicationDate}<br>
+      Location: ${article.location}<br>
+      Author: ${article.author.username}<br>
+      Category: ${article.category}
+    </p>
+  </c:forEach>
+
 
 
 <jsp:include page="footer.jsp" />
