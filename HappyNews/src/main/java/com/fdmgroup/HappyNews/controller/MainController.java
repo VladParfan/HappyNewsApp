@@ -1,13 +1,18 @@
 package com.fdmgroup.HappyNews.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import com.fdmgroup.HappyNews.model.Article;
 import com.fdmgroup.HappyNews.model.HappyUser;
 import com.fdmgroup.HappyNews.security.HappyUserDetails;
+import com.fdmgroup.HappyNews.service.ArticleService;
 import com.fdmgroup.HappyNews.service.HappyUserDetailsService;
 
 @Controller
@@ -17,7 +22,8 @@ public class MainController {
 	private final HappyUserDetailsService happyUserDetailsService;
 	
 	@Autowired
-	private ArticleController articleController;
+	private ArticleService articleService;
+	
 	
 	
 	
@@ -48,8 +54,9 @@ public class MainController {
 	@GetMapping(value= "/")
 	public String getIndex(ModelMap model) {
 		returnUserFromCurrentSession(model);
-		articleController.getLatestArticles(model);
-		
+		articleService.listLatestSixArticles();
+		List<Article> latestArticles = articleService.listLatestSixArticles();
+	    model.addAttribute("latestArticles", latestArticles);
 		
 		return "index";
 	}
