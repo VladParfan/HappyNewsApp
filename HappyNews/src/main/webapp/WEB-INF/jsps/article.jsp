@@ -39,6 +39,7 @@ Text:<input type="text" name="commentText" placeholder="Text" required /><br>
 
 </tr>
 </c:forEach> --%>
+
 <form action="/addComment" method="post">
   <!-- Add new comment form -->
   <input type="hidden" name="commentator" value="${user.username}">
@@ -83,7 +84,7 @@ Text:<input type="text" name="commentText" placeholder="Text" required /><br>
             <td>${user.username}</td>
             <td>${reply.publicationTime}</td>
             <td>${reply.commentText}</td>
-           <%--  <td>
+            <%-- <td>
               <!-- Add reply to reply form -->
               <form action="/addCommentReply" method="post">
                 <input type="hidden" name="commentator" value="${user.username}">
@@ -95,6 +96,7 @@ Text:<input type="text" name="commentText" placeholder="Text" required /><br>
             </td> --%>
           </tr>
         </table>
+        
       </c:if>
     </c:forEach>
   </c:if>
