@@ -41,6 +41,7 @@ Text:<input type="text" name="commentText" placeholder="Text" required /><br>
 </tr>
 </c:forEach> --%>
 <form action="/addComment" method="post">
+  <!-- Add new comment form -->
   <input type="hidden" name="commentator" value="${user.username}">
   <input type="hidden" name="articleId" value="${article.articleId}">
   Text: <input type="text" name="commentText" placeholder="Text" required />
@@ -48,7 +49,9 @@ Text:<input type="text" name="commentText" placeholder="Text" required /><br>
 </form>
 
 <c:forEach items="${listOfCommentsOfArticle}" var="comment">
+  <!-- Loop through each comment -->
   <c:if test="${comment.parentComment == null}">
+    <!-- Check if the comment is not a reply -->
     <br>
     ------------------------------
     <br>
@@ -58,6 +61,7 @@ Text:<input type="text" name="commentText" placeholder="Text" required /><br>
         <td>${comment.publicationTime}</td>
         <td>${comment.commentText}</td>
         <td>
+          <!-- Add reply form -->
           <form action="/addCommentReply" method="post">
             <input type="hidden" name="commentator" value="${user.username}">
             <input type="hidden" name="articleId" value="${article.articleId}">
@@ -71,14 +75,17 @@ Text:<input type="text" name="commentText" placeholder="Text" required /><br>
     <br>
 
     <c:forEach items="${listOfCommentsOfArticle}" var="reply">
+      <!-- Loop through each reply -->
       <c:if test="${reply.parentComment != null && reply.parentComment.commentId == comment.commentId}">
+        <!-- Check if the reply is a reply to the comment -->
         <table>
           <tr>
             <td></td>
             <td>${user.username}</td>
             <td>${reply.publicationTime}</td>
             <td>${reply.commentText}</td>
-            <td>
+           <%--  <td>
+              <!-- Add reply to reply form -->
               <form action="/addCommentReply" method="post">
                 <input type="hidden" name="commentator" value="${user.username}">
                 <input type="hidden" name="articleId" value="${article.articleId}">
@@ -86,7 +93,7 @@ Text:<input type="text" name="commentText" placeholder="Text" required /><br>
                 Reply to reply <input type="text" name="commentText" placeholder="Text" required />
                 <input type="submit" value="Add reply to reply" />
               </form>
-            </td>
+            </td> --%>
           </tr>
         </table>
       </c:if>

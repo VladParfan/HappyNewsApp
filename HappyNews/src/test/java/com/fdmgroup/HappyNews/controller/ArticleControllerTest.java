@@ -81,7 +81,7 @@ public class ArticleControllerTest {
 		when(mockCommentService.listOfCommentsForArticle(mockArticle)).thenReturn(mockListOfCommentsOfArticle);
 
 		mockMvc.perform(get("/goToArticlePage/1")).andExpect(status().isOk()).andExpect(view().name("index"));
-///expectview index
+
 
 	}
 

@@ -95,4 +95,6 @@ public class ArticleServiceTest {
 		verify(mockArticleRepository, times(1)).findById(mockArticle.getArticleId());
 		
 	}
+	
+	
 }

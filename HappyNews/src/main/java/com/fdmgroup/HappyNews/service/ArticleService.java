@@ -1,4 +1,5 @@
 package com.fdmgroup.HappyNews.service;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,15 @@ public class ArticleService {
 		Optional <Article> articleOpt = articleRepository.findById(articleId);
 		return articleOpt.orElse(null);
 	}
+	
+	public List<Article> listLatestSixArticles() {
+	    List<Article> articles = articleRepository.findLatestArticles();
+	    int size = articles.size();
+	    if (size > 6) {
+	      return articles.subList(0, 6);
+	    }
+	    return articles;
+	  }
 	
 	
 }
