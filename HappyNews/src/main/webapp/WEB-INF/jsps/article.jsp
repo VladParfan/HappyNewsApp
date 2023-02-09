@@ -46,36 +46,51 @@ Text:<input type="text" name="commentText" placeholder="Text" required /><br>
   Text: <input type="text" name="commentText" placeholder="Text" required />
   <input type="submit" value="Add new comment" />
 </form>
+
 <c:forEach items="${listOfCommentsOfArticle}" var="comment">
-  <%-- Check if the comment is a parent comment --%>
   <c:if test="${comment.parentComment == null}">
-  <br>
-    <tr>
-      <td>${user.username}</td>
-      <td>${comment.publicationTime}</td>
-      <td>${comment.commentText}</td>
-      <td>
-        <form action="/addCommentReply" method="post">
-          <input type="hidden" name="commentator" value="${user.username}">
-          <input type="hidden" name="articleId" value="${article.articleId}">
-          <input type="hidden" name="parentCommentId" value="${comment.commentId}">
-          Reply <input type="text" name="commentText" placeholder="Text" required />
-          <input type="submit" value="Add reply" />
-        </form>
-      </td>
-    </tr>
-  </c:if>
-  <br>
-  <%-- Check if the comment is a reply --%>
-  <c:if test="${comment.parentComment != null}">
-    <tr>
-      <td></td>
-      <td>aaaaa</td>
-      <td>${user.username}</td>
-      <td>${comment.publicationTime}</td>
-      <td>${comment.commentText}</td>
-      
-    </tr>
+    <br>
+    ------------------------------
+    <br>
+    <table>
+      <tr>
+        <td>${user.username}</td>
+        <td>${comment.publicationTime}</td>
+        <td>${comment.commentText}</td>
+        <td>
+          <form action="/addCommentReply" method="post">
+            <input type="hidden" name="commentator" value="${user.username}">
+            <input type="hidden" name="articleId" value="${article.articleId}">
+            <input type="hidden" name="parentCommentId" value="${comment.commentId}">
+            Reply <input type="text" name="commentText" placeholder="Text" required />
+            <input type="submit" value="Add reply" />
+          </form>
+        </td>
+      </tr>
+    </table>
+    <br>
+
+    <c:forEach items="${listOfCommentsOfArticle}" var="reply">
+      <c:if test="${reply.parentComment != null && reply.parentComment.commentId == comment.commentId}">
+        <table>
+          <tr>
+            <td></td>
+            <td>${user.username}</td>
+            <td>${reply.publicationTime}</td>
+            <td>${reply.commentText}</td>
+            <td>
+              <form action="/addCommentReply" method="post">
+                <input type="hidden" name="commentator" value="${user.username}">
+                <input type="hidden" name="articleId" value="${article.articleId}">
+                <input type="hidden" name="parentCommentId" value="${reply.commentId}">
+                Reply to reply <input type="text" name="commentText" placeholder="Text" required />
+                <input type="submit" value="Add reply to reply" />
+              </form>
+            </td>
+          </tr>
+        </table>
+      </c:if>
+    </c:forEach>
   </c:if>
 </c:forEach>
 <!-- -------------------------------------------------------- -->

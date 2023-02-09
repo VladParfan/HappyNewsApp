@@ -39,6 +39,7 @@ public class CommentController {
 			@RequestParam String commentText, @RequestParam(required = false) Integer parentCommentId) {
 		mainController.returnUserFromCurrentSession(model);
 		HappyUser user = happyUserService.findUserByName(commentator);
+		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 		LocalDateTime publicationTime = LocalDateTime.now();
 		String formattedDate = publicationTime.format(formatter);
