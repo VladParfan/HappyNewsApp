@@ -1,5 +1,6 @@
 package com.fdmgroup.HappyNews.controller;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -78,7 +79,7 @@ public class RequestController {
         Message message = new Message(articleFromDatabase.getAuthor(), text, false,formattedCurrentDateTime());
 		
 		messageService.saveMessage(message);
-		
+		articleFromDatabase.setPublicationDate(LocalDate.now());
 		articleService.saveArticle(articleFromDatabase);
 		requestService.deleteRequest(requestFromDatabase.getRequestId());
 		
@@ -169,7 +170,7 @@ List<Message> allReceivedMessages = messageService.listAllReceivedMessages(userF
 		}else {
 			model.addAttribute("role",false);
 		}
-		
+		mainController.returnUserFromCurrentSession(model);
 		model.addAttribute("allRequests", allRequests);
 		model.addAttribute("allReceivedMessages", allUserMessages);
 		
