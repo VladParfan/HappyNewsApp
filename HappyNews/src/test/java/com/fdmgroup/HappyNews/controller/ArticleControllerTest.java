@@ -72,7 +72,7 @@ public class ArticleControllerTest {
 
 	@Test
 	@WithMockUser
-	public void test_goToArticlePage_return_article() throws Exception {
+	public void test_goToArticlePage_return_index() throws Exception {
 
 		List<Comment> mockListOfCommentsOfArticle = new ArrayList<>();
 		// Article mockArticle = new Article();
@@ -80,12 +80,30 @@ public class ArticleControllerTest {
 		when(mockArticleService.findByArticleId(1)).thenReturn(mockArticle);
 		when(mockCommentService.listOfCommentsForArticle(mockArticle)).thenReturn(mockListOfCommentsOfArticle);
 
-		mockMvc.perform(get("/goToArticlePage/1")).andExpect(status().isOk())
-				.andExpect(model().attribute("article", mockArticle))
-				.andExpect(model().attribute("listOfCommentsOfArticle", mockListOfCommentsOfArticle));
+		mockMvc.perform(get("/goToArticlePage/1")).andExpect(status().isOk()).andExpect(view().name("index"));
+///expectview index
 
 	}
 
+	@Test
+	@WithMockUser
+	public void test_goToArticlePage_return_article() throws Exception {
+
+		List<Comment> mockListOfCommentsOfArticle = new ArrayList<>();
+		Article article = new Article();
+		article.setStatus(true);
+
+		when(mockArticleService.findByArticleId(1)).thenReturn(article);
+		when(mockCommentService.listOfCommentsForArticle(article)).thenReturn(mockListOfCommentsOfArticle);
+
+		mockMvc.perform(get("/goToArticlePage/1")).andExpect(status().isOk())
+				.andExpect(model().attribute("article", article))
+				.andExpect(model().attribute("listOfCommentsOfArticle", mockListOfCommentsOfArticle));
+
+	}
+	
+	
+	
 	@Test
 	@WithMockUser
 	public void test_goToAddArticle_returns_addArticle() throws Exception{
