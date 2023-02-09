@@ -28,5 +28,10 @@ public class ArticleService {
 		return articleOpt.orElse(null);
 	}
 	
+	public Optional<Article> findOptionalByArticleId(Integer articleId) {
+		Optional <Article> articleOpt = articleRepository.findById(articleId);
+		return articleOpt;
+	}
+	
 	
 }

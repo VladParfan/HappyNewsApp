@@ -3,6 +3,7 @@ package com.fdmgroup.HappyNews.controller;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -52,6 +53,10 @@ public class ArticleController {
           
 		Article article = articleService.findByArticleId(articleId);
 		List<Comment> listOfCommentsOfArticle = commentService.listOfCommentsForArticle(article);
+		Optional<Article> optional = articleService.findOptionalByArticleId(articleId);
+		if(optional.isEmpty()) {
+			return "index";
+		}
 		if(!article.isStatus()) {
 			return "index";
 		}
