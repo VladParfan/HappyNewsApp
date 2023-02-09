@@ -10,6 +10,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -92,11 +93,12 @@ public class ArticleControllerTest {
 		List<Comment> mockListOfCommentsOfArticle = new ArrayList<>();
 		Article article = new Article();
 		article.setStatus(true);
-
-		when(mockArticleService.findByArticleId(1)).thenReturn(article);
+		
+		when(mockArticleService.findOptionalByArticleId(5)).thenReturn(Optional.of(article));
+		when(mockArticleService.findByArticleId(5)).thenReturn(article);
 		when(mockCommentService.listOfCommentsForArticle(article)).thenReturn(mockListOfCommentsOfArticle);
 
-		mockMvc.perform(get("/goToArticlePage/1")).andExpect(status().isOk())
+		mockMvc.perform(get("/goToArticlePage/5")).andExpect(status().isOk())
 				.andExpect(model().attribute("article", article))
 				.andExpect(model().attribute("listOfCommentsOfArticle", mockListOfCommentsOfArticle));
 
