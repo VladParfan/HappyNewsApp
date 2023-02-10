@@ -6,10 +6,17 @@ public class Filters {
 	private String location;
 	private String author;
 	
+	
+	
 	public Filters() {
 		this.category = "No filter";
 		this.location = "No filter";
 		this.author = "No filter";
+	}
+	
+	public Filters(String category, String location) {
+		this.category = category;
+		this.location = location;
 	}
 	
 	public Filters(String category, String location, String author) {

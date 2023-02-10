@@ -10,6 +10,10 @@
 </head>
 <body>
 <jsp:include page="header.jsp" />
+<jsp:include page="searchbar.jsp" />
+		
+		<br></br>
+		<hr>
 <div>
 
 <span style="color: red">${errorMessage}</span>
