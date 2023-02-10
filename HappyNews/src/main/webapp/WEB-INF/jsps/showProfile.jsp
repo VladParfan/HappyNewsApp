@@ -15,15 +15,16 @@
 <jsp:include page="header.jsp" />
 
 <div>
-<h2>Profile ${user.username}</h2>
+<h2>Hello ${user.username} </h2>
+This is your profile <br><br>
 
 	<div class="users">
 		<div class="div1">
 			
-			<b>Username:</b> ${user.username}<br><br> 
-			<b>Email:</b> ${user.email}<br><br><br>
-			<b>Role:</b> ${user.role}<br><br> 
-			
+			<b>Username:</b> ${user.username}<br><br>
+			<b>Email:</b> ${user.email}<br><br>
+			<b>Role:</b> ${user.role}<br><br>
+			<b>Pet name</b> ${user.petName}<br> <br>
 			
 		</div>
 		<div class="div1">

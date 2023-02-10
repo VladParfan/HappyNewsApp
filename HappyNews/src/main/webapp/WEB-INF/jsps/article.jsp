@@ -87,7 +87,7 @@ Text:<input type="text" name="commentText" placeholder="Text" required /><br>
       
       <tr>
         <td><b>${comment.commentator.username}</b></td>
-        <td>${comment.publicationTime}</td>
+        <td class="small-text">${comment.publicationTime}</td>
         <td>${comment.commentText}</td>
         <td>
           <!-- Add reply form -->
@@ -110,7 +110,7 @@ Text:<input type="text" name="commentText" placeholder="Text" required /><br>
         <table>
           <tr>
             <td></td>
-            <td ><b>${reply.commentator.username}</b></td>
+            <td ><b>${reply.commentator.username}</b>
             <td class="small-text">${reply.publicationTime}</td>
             <td>${reply.commentText}</td>
  <%--          <td>

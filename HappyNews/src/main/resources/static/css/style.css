@@ -1,6 +1,27 @@
 
 @charset "ISO-8859-1";
 
+
+.button {
+  background-color: #41d7dd;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 15px;
+  cursor: pointer;
+}
+
+input[type="submit"] {
+    background-color: #41d7dd;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 15px;
+  cursor: pointer;
+}
+
+
+
 body {
   font-family: 'Lato', sans-serif;
   max-width: 1080px;

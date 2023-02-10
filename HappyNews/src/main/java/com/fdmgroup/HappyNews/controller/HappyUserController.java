@@ -56,16 +56,17 @@ public class HappyUserController {
 	
 	
 	@PostMapping("/editUserProfile")
-	public String editProfilePage(ModelMap model, @ModelAttribute("user") HappyUser user) {
-
+	public String editProfilePage(ModelMap model, @ModelAttribute("user") HappyUser user, @RequestParam String petName) {
+		mainController.returnUserFromCurrentSession(model);
 		HappyUser userFromDatabase = userDetailsService.findByUsername(user.getUsername());
 		userFromDatabase.setUsername(user.getUsername());
 		userFromDatabase.setEmail(user.getEmail());
 		userFromDatabase.setPetName(user.getPetName());
 		
-		mainController.returnUserFromCurrentSession(model);
+		System.out.println(user.getPetName());
+		
 		userDetailsService.saveUser(userFromDatabase);
-		return "editProfile";
+		return "showProfile";
 	}
 	
 }

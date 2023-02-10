@@ -13,11 +13,21 @@
 <body>
 
 <jsp:include page="header.jsp" />
+<br>
+<h1>Edit Profile</h1>
 
 
+<form action="/editUserProfile" method="post">
+<input type="hidden" name="username" value="${user.username}"/>
+<input type="hidden" name="password" value="${user.password}"/>
+<b>Username:</b> ${user.username}<br>
+Email:<br> <input type="text" name="email" value="${user.email}" required /><br><br>
+Pet name:<br> <input type="text" name="petName" value="${user.petName}" required /><br><br>	
+	<input type="submit" value="Save changes"/>
 
 
-
+</form>
+<br>
 <jsp:include page="footer.jsp" />
 
 
