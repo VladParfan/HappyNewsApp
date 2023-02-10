@@ -1,5 +1,6 @@
 package com.fdmgroup.HappyNews.service;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -7,7 +8,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.ui.ModelMap;
 
 import com.fdmgroup.HappyNews.model.Article;
 import com.fdmgroup.HappyNews.model.HappyUser;
@@ -61,27 +62,30 @@ public class ArticleService {
 		return articles;
 	}
 	
-	public List<Article> findArticleByAuthorName(List<Article> articles,String name){
-		Optional<HappyUser> optional = happyUserRepository.findByUsername(name);
-		System.out.println("name is                  " + name);
-		if(!optional.isPresent()) {
-			System.out.println("-----------------optional not present -----------------");
+	public List<Article> findArticleByAuthorName(List<Article> articles,String name, ModelMap model){
+		if(name.equals("No filter")) {
 			return articles;
 		}
-		System.out.println("optional is present ---------------------------------------------------------");
-		HappyUser author = happyUserRepository.findByUsername(name).get();
 		
-		System.out.println("---------------------------------------author acc " + author);
 		
-		 
+		Optional<HappyUser> optional = happyUserRepository.findByUsernameIgnoreCase(name);
+		
+		if(!optional.isPresent()) {
+			String errorAuthor = "author not found";
+			model.addAttribute("errorAuthor",errorAuthor);
+			return articles;
+		} 
+		
 		if (!name.equals("No filter")) {
-			
+			HappyUser author = happyUserRepository.findByUsernameIgnoreCase(name).get();
 			List<Article> findByCategory = articleRepository.findByAuthor(author);
 			
 			List<Article> result =  joinTwoLists(articles, findByCategory);
 			
 			return result;
 		}
+		
+		
 		
 		
 		return articles;
@@ -102,7 +106,7 @@ public class ArticleService {
 	
 	
 	
-public List<Article> filterResults(List<Article> articleList, Filters filters) {
+public List<Article> filterResults(List<Article> articleList, Filters filters, ModelMap model) {
 		
 		List<Article>filteredArticles = articleList;
 		System.out.println("------------------ location");
@@ -110,7 +114,7 @@ public List<Article> filterResults(List<Article> articleList, Filters filters) {
 		System.out.println("------------------ category");
 		filteredArticles = findArticleByCategory(filteredArticles, filters.getCategory());
         System.out.println("------------------ author");
-		filteredArticles = findArticleByAuthorName(filteredArticles, filters.getAuthor());
+		filteredArticles = findArticleByAuthorName(filteredArticles, filters.getAuthor(), model);
 		
        for(Article articles: filteredArticles) {
     	   System.out.println(articles.toString());

@@ -22,7 +22,7 @@
 		Password: <input type="password" name="password" required /><br>
 		Email: <input type="email" name="email" required />
 		<br> Question for reseting password: <br> What is your
-		favourite pet name? <br> <input type="text" name="answerQuestion"
+		favourite pet name? <br> <input type="text" name="petName"
 			required /><br> <input type="submit" value="Submit">
 	</form>
 
