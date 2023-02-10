@@ -67,8 +67,12 @@ public class RequestController {
 		Request requestFromDatabase = requestService.getRequestFromDatabase(requestId);
 		
 		Article articleFromDatabase = articleService.findByArticleId(requestFromDatabase.getArticle().getArticleId());
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); 
+		LocalDateTime currentTime = LocalDateTime.now(); 
+		String publicationDate = currentTime.format(formatter);
 		
 		articleFromDatabase.setStatus(true);
+		articleFromDatabase.setPublicationDate(publicationDate);
 		
 		String text = "Your article:  " + articleFromDatabase.getTitle() + " has been confirmed.";
 		
