@@ -32,7 +32,7 @@
  <br>
 
  <c:choose>
-	<c:when test="${loggedIn == true && article.author.id == user.id || user.role == admin}">
+	<c:when test="${loggedIn == true && user.role == 'ROLE_ADMIN' }">
 		
 						<a href="/goToEditArticle/${article.articleId}"><i>Edit article</i></a>
 						
