@@ -230,7 +230,7 @@ public class ArticleController {
 			model.addAttribute("foundArticles", foundArticles);
 			model.addAttribute("searchedPhrase", articleTitle);
 			model.addAttribute("filters", new Filters());
-			
+			maincontroller.returnUserFromCurrentSession(model);
 
 			return "searching-page";
 		}
