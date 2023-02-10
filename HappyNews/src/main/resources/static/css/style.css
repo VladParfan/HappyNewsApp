@@ -20,6 +20,14 @@ h1 {
 	
 }
 
+.center {
+	display: flex;
+	justify-content: center
+}
+.in-center {
+	text-align: center;
+}
+
 #col1, #col2, #col3  {
     /* border:solid black 2px; */
     margin:20px;

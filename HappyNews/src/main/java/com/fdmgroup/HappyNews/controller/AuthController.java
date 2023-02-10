@@ -76,7 +76,7 @@ public class AuthController {
 		return "admin";
 	}
 	
-	@GetMapping("/change-password")
+	@GetMapping("/goChangePasswordPage")
 	public String changePasswordPage(@ModelAttribute("happyUser") HappyUser happyUser) {
 			
 			return "changePassword";

@@ -4,7 +4,10 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+
 <head>
+<c:url value="/css/style.css" var="jstlCss" />
+<link href="${jstlCss}" rel="stylesheet">
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
@@ -54,9 +57,10 @@
  	
   <c:forEach var="article" items="${latestArticles}">
     <div class="max" id="col${status.index % 3 + 1}">
-    <b><a class="products1 colo" href="goToArticlePage/${article.articleId}">${article.title}</a></b><br>
+    
     <small>
     <img src="pictures/pic1.jpg" class="img-article" />
+      <b><a class="products1 colo" href="goToArticlePage/${article.articleId}">${article.title}</a></b><br>
       Date: ${article.publicationDate}<br>
       Location: ${article.location}<br>
       Author: ${article.author.username}<br>
@@ -69,7 +73,16 @@
  
 
 </div>
+<br><br>
 </div>
+ <div class="center">
+<a href="/" ><small class=colo>Go to homepage</small></a>
+
+<br><br>
+</div>
+
+
+
 <jsp:include page="footer.jsp" />
 </body>
 </html>

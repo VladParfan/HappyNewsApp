@@ -113,7 +113,7 @@ Text:<input type="text" name="commentText" placeholder="Text" required /><br>
             <td ><b>${reply.commentator.username}</b></td>
             <td class="small-text">${reply.publicationTime}</td>
             <td>${reply.commentText}</td>
-            <%-- <td>
+ <%--          <td>
               <!-- Add reply to reply form -->
               <form action="/addCommentReply" method="post">
                 <input type="hidden" name="commentator" value="${user.username}">
@@ -122,7 +122,7 @@ Text:<input type="text" name="commentText" placeholder="Text" required /><br>
                 <input type="text" name="commentText" placeholder="Text" required />
                 <input type="submit" value="Add reply to reply" />
               </form>
-            </td>  --%>
+            </td>  --%>  
           </tr>
         </table>
         
