@@ -13,8 +13,10 @@
 <body>
 
 <jsp:include page="header.jsp" />
+<br>
+<H1>FAQ</H1>
 
-
+<br>
 <jsp:include page="footer.jsp" />
 
 

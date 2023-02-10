@@ -14,7 +14,7 @@
 <footer>
 
 <div class="foot-txt">
-		<a href="/toAboutHappyNews">About Shazar</a>
+		<a href="/toAboutHappyNews">About Happy News</a>
 		<a href="/goToFAQ">FAQ</a>
 		<a href="/toContact">Contact Us</a>
 		<a href="/toPrivacyPolicy">Privacy Policy</a>

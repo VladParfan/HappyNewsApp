@@ -58,6 +58,8 @@ public class CommentController {
 
 //		comment.setParentComment(parentComment);
 		model.addAttribute("article", articleToComment);
+		
+		articleToComment.setNumberOfComments(articleToComment.getNumberOfComments() + 1);
 
 		commentService.saveComment(comment);
 		model.addAttribute("comment", comment);
@@ -74,6 +76,7 @@ public class CommentController {
 	@PostMapping("/addCommentReply")
 	public String addCommentReply(ModelMap model, @RequestParam Integer articleId, @RequestParam String commentator,
 			@RequestParam String commentText, @RequestParam Integer parentCommentId) {
+		mainController.returnUserFromCurrentSession(model);
 		HappyUser user = happyUserService.findUserByName(commentator);
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		LocalDateTime publicationTime = LocalDateTime.now();
@@ -82,9 +85,12 @@ public class CommentController {
 		Comment parentComment = commentService.findCommentById(parentCommentId);
 
 		Comment commentReply = new Comment(user, article, parentComment, formattedDate, commentText);
+		
+		article.setNumberOfComments(article.getNumberOfComments() + 1);
 		commentService.saveComment(commentReply);
 		model.addAttribute("comment", commentReply);
 		List<Comment> listOfCommentsReply = commentService.listOfCommentsForArticle(article);
+		
 		model.addAttribute("listOfCommentsOfArticle", listOfCommentsReply);
 		model.addAttribute("article", article);
 

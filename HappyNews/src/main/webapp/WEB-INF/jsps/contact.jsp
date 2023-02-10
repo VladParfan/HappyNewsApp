@@ -14,7 +14,7 @@
 
 <jsp:include page="header.jsp" />
 
-
+<H1>Contact</H1>
 <jsp:include page="footer.jsp" />
 
 

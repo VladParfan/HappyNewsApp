@@ -6,14 +6,14 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Terms and Condition</title>
 <c:url value="/css/style.css" var="jstlCss" />
 <link href="${jstlCss}" rel="stylesheet">
 </head>
 <body>
 
 <jsp:include page="header.jsp" />
-
+<h1>Terms and Condition</h1>
 <jsp:include page="footer.jsp" />
 
 

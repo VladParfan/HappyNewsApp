@@ -22,6 +22,6 @@
 	
 	<br>
 	<jsp:include page="footer.jsp" />
-	
+	<br><br>
 </body>
 </html>

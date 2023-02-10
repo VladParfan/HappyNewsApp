@@ -25,19 +25,24 @@
 			<p>Password:</p>
 			<input type="password" name="password">
 		</div>
+		<br>
 		<div>
 			<input class="button" type="submit" value="Log in">
 		</div>
+		
+		<br>
 		<div>
 			<a href="/registration">Register</a>
 		</div>
 		<div>
+		
+		<br>
 			<a href="/recover-password">Reset password</a>
 		</div>
 		</form>
 
 
-
+<br><br>
 		<jsp:include page="footer.jsp" />
 </body>
 </html>

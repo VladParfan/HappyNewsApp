@@ -17,20 +17,59 @@
 <div>
 
 <span style="color: red">${errorMessage}</span>
-			
+
+<h1 >Top Articles</h1>
+<div class="center" >
 <!-- ========Latest Articles================== -->
+ 	
+ 	
+ 	<div class="articles-view">
+ 	
+ 	
+  <c:forEach var="article" items="${topArticles}" varStatus="status">
+    <div class="max" id="col${status.index % 3 + 1}">
+      
+      <img src="pictures/pic1.jpg" class="img-article" />
+     <b><a  class="products1 colo" href="goToArticlePage/${article.articleId}">${article.title}</a></b><br>
+      <small>
+      Date: ${article.publicationDate}<br>
+      Location: ${article.location}<br>
+      Author: ${article.author.username}<br>
+      Category: ${article.category}<br>
+    
+   </small>
+   
+    </div>
+  </c:forEach>		
+</div>
+</div>
+
 <h1>Latest Articles</h1>
+
+
+<!-- ========Latest Articles================== -->
+<div class="center" >
+
+ 	<div class="articles-view">
+ 	
   <c:forEach var="article" items="${latestArticles}">
-    <p>
-      <b><a href="goToArticlePage/${article.articleId}">${article.title}</a></b><br>
+    <div class="max" id="col${status.index % 3 + 1}">
+    <b><a class="products1 colo" href="goToArticlePage/${article.articleId}">${article.title}</a></b><br>
+    <small>
+    <img src="pictures/pic1.jpg" class="img-article" />
       Date: ${article.publicationDate}<br>
       Location: ${article.location}<br>
       Author: ${article.author.username}<br>
       Category: ${article.category}
-    </p>
+    
+    </small>
+   
+    </div>
   </c:forEach>
+ 
 
-
+</div>
+</div>
 
 <jsp:include page="footer.jsp" />
 </body>

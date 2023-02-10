@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>About Happy news</title>
 <c:url value="/css/style.css" var="jstlCss" />
 <link href="${jstlCss}" rel="stylesheet">
 </head>
@@ -14,7 +14,7 @@
 
 <jsp:include page="header.jsp" />
 
-
+<h1>About Happy news</h1>
 <jsp:include page="footer.jsp" />
 
 

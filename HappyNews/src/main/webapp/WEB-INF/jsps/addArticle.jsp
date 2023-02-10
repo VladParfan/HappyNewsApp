@@ -7,13 +7,13 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
-<c:url value="/css/style.css" var="jstlCss" />
+<c:url value="/css/addArticle.css" var="jstlCss" />
 <link href="${jstlCss}" rel="stylesheet">
 </head>
 <body>
 
 	<jsp:include page="header.jsp" />
-	<h2>Send Article</h2>
+	<h1>Send Article</h1>
 
 	<form action="/addArticle" method="post" >
 		Title:<input type="text" name="title" placeholder="Title" required /><br>
@@ -34,7 +34,7 @@
 			
 			
 	</form>
-
+<br><br>
 
 
 	<jsp:include page="footer.jsp" />

@@ -7,20 +7,43 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Article</title>
-<c:url value="/css/style.css" var="jstlCss" />
+<c:url value="/css/styleArticle.css" var="jstlCss" />
 <link href="${jstlCss}" rel="stylesheet">
 </head>
 <body>
 
 <jsp:include page="header.jsp" />
+<br><br>
 <!-- -------------------------------------------------------- -->
 <!-- adding article -->
+<div class= "article-content">
+<h2 class="article-title">${article.title} </h2>
+<div class="article-details">
+    <b> Author:</b> ${article.author.username}<br>
+      <b>Date:</b> ${article.publicationDate}<br>
+      <b>Location:</b> ${article.location}<br>
+     
+      <b>Category:</b> ${article.category}
+ </div>
+ <div class="article-text"> ${article.articleText}</div>
+ </div>
+ 
+<!--  //VLAD TUTAJ TO SIE MA WYSWIETLAC JAK JESTES ADMINEM -->
+ <br>
 
-${article.title}
-      Date: ${article.publicationDate}<br>
-      Location: ${article.location}<br>
-      Author: ${article.author.username}<br>
-      Category: ${article.category}
+ <c:choose>
+	<c:when test="${loggedIn == true && article.author.id == user.id || user.role == admin}">
+		
+						<a href="/goToEditArticle/${article.articleId}"><i>Edit article</i></a>
+						
+					</c:when>
+					<c:otherwise>
+						
+ 	</c:otherwise>
+				</c:choose>
+			
+ 
+ 
  
 <!-- adding comment -->
 <%-- <form action="/addComment" method="post" >
@@ -39,7 +62,12 @@ Text:<input type="text" name="commentText" placeholder="Text" required /><br>
 
 </tr>
 </c:forEach> --%>
+<br><br>
+<h2>comments</h2>
 
+
+<br><br>
+<div class="comments-section">
 <form action="/addComment" method="post">
   <!-- Add new comment form -->
   <input type="hidden" name="commentator" value="${user.username}">
@@ -53,20 +81,21 @@ Text:<input type="text" name="commentText" placeholder="Text" required /><br>
   <c:if test="${comment.parentComment == null}">
     <!-- Check if the comment is not a reply -->
     <br>
-    ------------------------------
+    --------------------------------------------------------------------------
     <br>
     <table>
+      
       <tr>
-        <td>${user.username}</td>
+        <td><b>${user.username}</b></td>
         <td>${comment.publicationTime}</td>
         <td>${comment.commentText}</td>
         <td>
           <!-- Add reply form -->
           <form action="/addCommentReply" method="post">
-            <input type="hidden" name="commentator" value="${user.username}">
+            <input type="hidden" name="commentator" value="${commentator.username}">
             <input type="hidden" name="articleId" value="${article.articleId}">
             <input type="hidden" name="parentCommentId" value="${comment.commentId}">
-            Reply <input type="text" name="commentText" placeholder="Text" required />
+           <input type="text" name="commentText" placeholder="Text" required />
             <input type="submit" value="Add reply" />
           </form>
         </td>
@@ -81,8 +110,8 @@ Text:<input type="text" name="commentText" placeholder="Text" required /><br>
         <table>
           <tr>
             <td></td>
-            <td>${user.username}</td>
-            <td>${reply.publicationTime}</td>
+            <td ><b>${user.username}</b></td>
+            <td class="small-text">${reply.publicationTime}</td>
             <td>${reply.commentText}</td>
             <%-- <td>
               <!-- Add reply to reply form -->
@@ -90,10 +119,10 @@ Text:<input type="text" name="commentText" placeholder="Text" required /><br>
                 <input type="hidden" name="commentator" value="${user.username}">
                 <input type="hidden" name="articleId" value="${article.articleId}">
                 <input type="hidden" name="parentCommentId" value="${reply.commentId}">
-                Reply to reply <input type="text" name="commentText" placeholder="Text" required />
+                <input type="text" name="commentText" placeholder="Text" required />
                 <input type="submit" value="Add reply to reply" />
               </form>
-            </td> --%>
+            </td>  --%>
           </tr>
         </table>
         
@@ -101,6 +130,7 @@ Text:<input type="text" name="commentText" placeholder="Text" required /><br>
     </c:forEach>
   </c:if>
 </c:forEach>
+</div>
 <!-- -------------------------------------------------------- -->
 <jsp:include page="footer.jsp" />
 

@@ -7,7 +7,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
-<c:url value="/css/style.css" var="jstlCss" />
+<c:url value="/css/addArticle.css" var="jstlCss" />
 <link href="${jstlCss}" rel="stylesheet">
 </head>
 <body>

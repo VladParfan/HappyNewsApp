@@ -37,10 +37,7 @@ public class MainController {
 	 */
 	
 	
-	@GetMapping("/hello")
-	public String sayHello() {
-		return "hello";
-	}
+	
 
 	@GetMapping("/showUserInfo")
 	public String showUserInfo(ModelMap model) {
@@ -54,10 +51,13 @@ public class MainController {
 	@GetMapping(value= "/")
 	public String getIndex(ModelMap model) {
 		returnUserFromCurrentSession(model);
-		articleService.listLatestSixArticles();
+		
 		List<Article> latestArticles = articleService.listLatestSixArticles();
 	    model.addAttribute("latestArticles", latestArticles);
 		
+	    List<Article> topArticles = articleService.listTopSixArticles();
+	    model.addAttribute("topArticles", topArticles);
+	   
 		return "index";
 	}
 	

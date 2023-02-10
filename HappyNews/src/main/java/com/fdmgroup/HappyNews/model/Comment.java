@@ -21,15 +21,17 @@ public class Comment {
 	@ManyToOne(cascade = {CascadeType.ALL})
 	HappyUser commentator;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.REMOVE)
 	Article article;
 	
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.ALL})
 	Comment parentComment;
 	
 	//private LocalDateTime publicationTime;
 	private String publicationTime;
 	
+	
+	@Column(name="comment_text", length=400)
 	private String commentText;
 
 	

@@ -1,6 +1,60 @@
 
 @charset "ISO-8859-1";
 
+
+form {
+	margin: 0 auto;
+	width: 500px;
+	padding: 30px;
+	background-color: white;
+	box-shadow: 0px 0px 5px 0px #41d7dd;
+}
+
+input[type="text"], select {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 20px;
+	font-size: 16px;
+	border: none;
+	outline: none;
+	box-shadow: none;
+	border-bottom: 2px solid #41d7dd;
+}
+
+input[type="submit"] {
+	width: 100%;
+	padding: 10px;
+	background-color: #41d7dd;
+	color: white;
+	font-size: 16px;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	margin-top: 20px;
+}
+
+label {
+	font-size: 16px;
+	color: #41d7dd;
+	margin-bottom: 10px;
+	display: block;
+}
+
+input[type="text"][name="articleText"] {
+	height: 200px;
+	resize: none;
+}
+
+
+
+
+
+
+
+
+
+
+
 body {
   font-family: 'Lato', sans-serif;
   max-width: 1080px;
@@ -17,7 +71,6 @@ h1 {
 
 .colo{
 	color: #808080;
-	
 }
 
 #col1, #col2, #col3  {
@@ -51,23 +104,19 @@ h1 {
   object-fit: cover;
 }
 
-.max{
-	max-width: 200px;
-}
+
 
 
     .articles-view {
     display: flex;
     flex-wrap: wrap;
     width: 80%;
-    
   }
 
   .article {
     width: 33.33%;
     padding: 20px;
     text-align: center;
-    
   }
 
   .img-article {

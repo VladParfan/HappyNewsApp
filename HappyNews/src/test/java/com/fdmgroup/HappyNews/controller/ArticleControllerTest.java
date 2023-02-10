@@ -139,7 +139,7 @@ public class ArticleControllerTest {
 		HappyUser author = new HappyUser();
 		author.setUsername("testauthor");
 
-		Article article = new Article("testTitle", "testArticleText", LocalDate.of(2023, 2, 9), "testLocation", author,
+		Article article = new Article("testTitle", "testArticleText", "2023, 2, 9", "testLocation", author,
 				"people");
 		when(mockArticleService.findByArticleId(2)).thenReturn(mockArticle);
 		mockMvc.perform(post("/editArticle/").param("title", "title").param("articleText", "articleText")

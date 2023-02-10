@@ -1,6 +1,7 @@
 package com.fdmgroup.HappyNews.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,7 +23,7 @@ public class Article {
 	@Column(name="article_text", length=1900)
 	private String articleText;
 	
-	private LocalDate publicationDate;
+	private String publicationDate;
 	
 	private String location;
 	
@@ -35,14 +36,17 @@ public class Article {
 	
 	private String category;
 
+	private int numberOfComments;
 	
 	
+
+
 	public Article() {
 		
 	}
 
 	
-	public Article(String title, String articleText, LocalDate publicationDate, String location, HappyUser author, String category) {
+	public Article(String title, String articleText, String publicationDate, String location, HappyUser author, String category) {
 		super();
 		this.title = title;
 		this.articleText = articleText;
@@ -73,12 +77,12 @@ public class Article {
 	}
 
 
-	public LocalDate getPublicationDate() {
+	public String getPublicationDate() {
 		return publicationDate;
 	}
 
 
-	public void setPublicationDate(LocalDate publicationDate) {
+	public void setPublicationDate(String publicationDate) {
 		this.publicationDate = publicationDate;
 	}
 
@@ -128,7 +132,14 @@ public class Article {
 	public int getArticleId() {
 		return articleId;
 	}
+	public int getNumberOfComments() {
+		return numberOfComments;
+	}
 
+
+	public void setNumberOfComments(int numberOfComments) {
+		this.numberOfComments = numberOfComments;
+	}
 
 	@Override
 	public String toString() {
@@ -136,6 +147,8 @@ public class Article {
 				+ ", publicationDate=" + publicationDate + ", location=" + location + ", author=" + author + ", status="
 				+ status + ", category=" + category + "]";
 	}
+
+
 
 
 
