@@ -86,13 +86,13 @@ Text:<input type="text" name="commentText" placeholder="Text" required /><br>
     <table>
       
       <tr>
-        <td><b>${user.username}</b></td>
+        <td><b>${comment.commentator.username}</b></td>
         <td>${comment.publicationTime}</td>
         <td>${comment.commentText}</td>
         <td>
           <!-- Add reply form -->
           <form action="/addCommentReply" method="post">
-            <input type="hidden" name="commentator" value="${commentator.username}">
+            <input type="hidden" name="commentator" value="${user.username}">
             <input type="hidden" name="articleId" value="${article.articleId}">
             <input type="hidden" name="parentCommentId" value="${comment.commentId}">
            <input type="text" name="commentText" placeholder="Text" required />
@@ -110,7 +110,7 @@ Text:<input type="text" name="commentText" placeholder="Text" required /><br>
         <table>
           <tr>
             <td></td>
-            <td ><b>${user.username}</b></td>
+            <td ><b>${reply.commentator.username}</b></td>
             <td class="small-text">${reply.publicationTime}</td>
             <td>${reply.commentText}</td>
             <%-- <td>
