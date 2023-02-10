@@ -110,7 +110,7 @@ public class ArticleController {
 	
 		
 		
-		return "index";
+		return "article-confirmation";
 		
 	}
 
@@ -242,6 +242,10 @@ public class ArticleController {
 
 			return "searching-page";
 		}
+	  
+	  
+	  
+	  
 	
 	
 	

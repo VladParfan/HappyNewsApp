@@ -24,15 +24,17 @@ public class AuthController {
 			private final HappyUserValidator happyUserValidator;
 			private final  RegistrationService registrationService;
 			private final HappyUserDetailsService userDetailsService;
+			private final MainController mainController;
 			
 			
 		@Autowired	
-	public AuthController(HappyUserValidator happyUserValidator, HappyUserRepository userRepository,RegistrationService registrationService,HappyUserDetailsService userDetailsService) {
+	public AuthController(HappyUserValidator happyUserValidator, HappyUserRepository userRepository,RegistrationService registrationService,HappyUserDetailsService userDetailsService,MainController mainController) {
 				super();
 				this.userRepository = userRepository;;
 				this.happyUserValidator = happyUserValidator;
 				this.registrationService = registrationService;
 				this.userDetailsService = userDetailsService;
+				this.mainController = mainController;
 			}
 
 
@@ -77,8 +79,8 @@ public class AuthController {
 	}
 	
 	@GetMapping("/goChangePasswordPage")
-	public String changePasswordPage(@ModelAttribute("happyUser") HappyUser happyUser) {
-			
+	public String changePasswordPage(@ModelAttribute("happyUser") HappyUser happyUser, ModelMap model) {
+			mainController.returnUserFromCurrentSession(model);
 			return "changePassword";
 		}
 		
@@ -91,7 +93,7 @@ public class AuthController {
 			String hashedOldPasswordString = hashedOldPassword.toString();
 			UserDetails userDetails = userDetailsService.loadUserByEmailForPasswordChange(user.getEmail());
 			HappyUserDetails happyUserDetails1 = (HappyUserDetails) userDetails;
-			
+			mainController.returnUserFromCurrentSession(model);
 			
 			if(!newPassword.equals(confirmNewPassword)) {
 				model.addAttribute("errorMessage","New password and Cofirm password does not match");

@@ -46,7 +46,7 @@
 		</div>
 		<div class="menu-categories ">
 
-			<a href="/toPeople">People</a> 
+			<a href="/goToCategory/People">People</a> 
 			<a href="/toCulture">Culture</a> 
 			<a href="/toEnvironment">Environment</a> 
 			<a href="/toScience">Science</a>

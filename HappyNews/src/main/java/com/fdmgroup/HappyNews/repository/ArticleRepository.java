@@ -17,9 +17,7 @@ public interface ArticleRepository extends JpaRepository<Article, Integer> {
 	 
 	 @Query("SELECT a FROM Article a ORDER BY a.numberOfComments DESC") 
 	 List<Article> findTopSixByOrderByNumberOfCommentsDesc(); 
-	 
-	 
-	 
+
 	 Optional<Article> findByTitle(String name);
 		List<Article> findByTitleIgnoreCaseContaining(String name);
 		List<Article> findByTitleIgnoreCaseStartingWith(String name);
