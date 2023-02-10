@@ -161,7 +161,15 @@ public class ArticleController {
 	  
 	  @PostMapping("/filtered")
 		public String filterSearch(ModelMap model, @RequestParam String searchedPhrase,@RequestParam String category, @RequestParam String location, @RequestParam String author) {
-
+		  		
+		  System.out.println("--------------author " +   author);
+		  
+		  if(author.isEmpty() || author == null || author == "" || author.equals("no filter")) {
+		  			
+		  			
+		  			
+		  			author="No filter";
+		  		}
 			// check if there are mi nand max values typed, if yes then check if min <max
 
 			if (searchedPhrase.isEmpty() || searchedPhrase == null || searchedPhrase =="") {
@@ -184,7 +192,7 @@ public class ArticleController {
 			
 					System.out.println("filtered articles ------------------------ should be 2 " + filteredArticles);
 				
-			filteredArticles = articleService.filterResults(filteredArticles, filters);
+			filteredArticles = articleService.filterResults(filteredArticles, filters, model);
 			
 			System.out.println("filtered articles ------------------------ should be 4 " + filteredArticles);
 

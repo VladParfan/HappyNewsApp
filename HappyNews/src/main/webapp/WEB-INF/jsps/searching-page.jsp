@@ -52,8 +52,11 @@
 					</select>
 				 <input class="submit-filters" type="submit" value="Filter" />
 				</div>
+				<span style="color: red">${errorAuthor}</span><br>
+				<input class="search-input" type="text" name="author" placeholder="Search an article" >
+			<input class="submit-button" type="submit" value="Filter">
 				
-				<div class="filter-item">
+				<%-- <div class="filter-item">
 				<span class="text-filters">Author:</span>
 				<select class="select-class" name="author">
 					<option value="${filters.author }" selected="selected">${filters.author }</option>
@@ -65,7 +68,7 @@
 					
 					</select>
 				 <input class="submit-filters" type="submit" value="Filter" />
-				</div>
+				</div> --%>
 				
 				
 				</form>
