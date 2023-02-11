@@ -14,25 +14,27 @@
 
 <jsp:include page="header.jsp" />
 
-<h1 >${user.username}</h1>
+<h1 >${username} articles </h1>
 <div class="center" >
 <!-- ========Latest Articles================== -->
  	
+ 	<br>
+ 	<div >
  	
- 	<div class="articles-view">
  	
- 	
-  <c:forEach var="article" items="${listOfUserArticles}" varStatus="status">
-    <div class="max" id="col${status.index % 3 + 1}">
+  <c:forEach var="article" items="${listOfUserArticles}" >
+    <div  >
       
       <img src="${pic1}" class="img-article" />
      <b><a  class="products1 colo" href="/goToArticlePage/${article.articleId}">${article.title}</a></b><br>
       <small>
-      Date: ${article.publicationDate}<br>
-      Location: ${article.location}<br>
-      Author: ${article.author.username}<br>
-      Category: ${article.category}<br>
-    
+      <b>Date:</b> ${article.publicationDate}, 
+      <b>Location:</b>${article.location}, 
+      <b>Category:</b> <a  href="/${article.category}">${article.category}</a><br>
+      
+      
+      
+      
    </small>
    
     </div>
@@ -43,8 +45,8 @@
 
 
 
-
-
+<br>
+<br>
 <jsp:include page="footer.jsp" />
 
 

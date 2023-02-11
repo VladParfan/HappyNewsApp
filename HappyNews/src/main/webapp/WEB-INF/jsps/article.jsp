@@ -22,8 +22,7 @@
     <b> Author:</b> ${article.author.username}<br>
       <b>Date:</b> ${article.publicationDate}<br>
       <b>Location:</b> ${article.location}<br>
-     
-      <b>Category:</b> ${article.category}
+      <b>Category:</b> <a  href="/${article.category}">${article.category}</a> <br>
  </div>
  <div class="article-text"> ${article.articleText}</div>
  </div>

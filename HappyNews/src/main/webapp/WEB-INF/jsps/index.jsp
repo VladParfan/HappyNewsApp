@@ -35,10 +35,10 @@
       <img src="pictures/pic1.jpg" class="img-article" />
      <b><a  class="products1 colo" href="goToArticlePage/${article.articleId}">${article.title}</a></b><br>
       <small>
-      Date: ${article.publicationDate}<br>
-      Location: ${article.location}<br>
-      Author: ${article.author.username}<br>
-      Category: ${article.category}<br>
+     <b> Date:</b> ${article.publicationDate}<br>
+     <b> Location:</b> ${article.location}<br>
+      <b> Author: </b> ${article.author.username}<br>
+      <b>Category:</b> <a  href="/${article.category}">${article.category}<br>
     
    </small>
    
@@ -47,7 +47,36 @@
 </div>
 </div>
 
+<!-- ========Latest Articles================== -->
 <h1>Latest Articles</h1>
+<div class="center" >
+
+ 	<div class="articles-view">
+ 	
+  <c:forEach var="article" items="${latestArticles}">
+    <div class="max" id="col${status.index % 3 + 1}">
+    
+    <small>
+    <img src="pictures/pic1.jpg" class="img-article" />
+      <b><a class="products1 colo" href="goToArticlePage/${article.articleId}">${article.title}</a></b><br>
+     <b> Date: </b>${article.publicationDate}<br>
+      <b>Location:</b> ${article.location}<br>
+     <b> Author:</b>  <a href="/articles/${article.author.username}">${article.author.username}</a><br>
+      <b>Category:</b> <a  href="/${article.category}">${article.category}</a><br>
+   
+    </small>
+   
+    </div>
+  </c:forEach>
+</div>
+</div>
+<!-- ========RECOMMENDED ARTICLES================== -->
+
+<c:choose>
+					<c:when test="${loggedIn == true}">
+		<c:choose>			
+		<c:when test ="${articlesByUserCategories.size() != 0 }">
+<h1>Recommended Articles</h1>
 
 
 <!-- ========Latest Articles================== -->
@@ -55,7 +84,7 @@
 
  	<div class="articles-view">
  	
-  <c:forEach var="article" items="${latestArticles}">
+  <c:forEach var="article" items="${articlesByUserCategories}">
     <div class="max" id="col${status.index % 3 + 1}">
     
     <small>
@@ -70,14 +99,15 @@
    
     </div>
   </c:forEach>
- 
+  </c:when>
+  <c:otherwise>
+  <a href="/subscription">Go To Subscribe</a>
+  </c:otherwise>
+  </c:choose>
+  </c:when>
+ </c:choose>
 
 </div>
-<br><br>
-</div>
- <div class="center">
-<a href="/" ><small class=colo>Go to homepage</small></a>
-
 <br><br>
 </div>
 
