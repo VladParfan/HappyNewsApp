@@ -29,6 +29,7 @@ import com.fdmgroup.HappyNews.repository.ArticleRepository;
 import com.fdmgroup.HappyNews.repository.HappyUserRepository;
 import com.fdmgroup.HappyNews.security.HappyUserDetails;
 import com.fdmgroup.HappyNews.service.ArticleService;
+import com.fdmgroup.HappyNews.service.CategoryService;
 import com.fdmgroup.HappyNews.service.CommentService;
 import com.fdmgroup.HappyNews.service.HappyUserDetailsService;
 import com.fdmgroup.HappyNews.util.Filters;
@@ -51,6 +52,9 @@ public class ArticleController {
 	@Autowired
 	HappyUserDetailsService happyUserService;
 	
+	@Autowired
+	CategoryService categoryService;
+	
 	@Autowired 
 	CommentService commentService;
 	
@@ -69,6 +73,9 @@ public class ArticleController {
 		}
 		model.addAttribute("article", article);
 		model.addAttribute("listOfCommentsOfArticle", listOfCommentsOfArticle);
+		
+		List<Article> latestArticlesinCategory = articleService.findLatestArticlesByCategory(article.getCategory());
+		model.addAttribute("latestArticlesinCategory", latestArticlesinCategory);
 		return "article";
 
 	}

@@ -24,7 +24,9 @@ public interface ArticleRepository extends JpaRepository<Article, Integer> {
 		List<Article> findByTitleIgnoreCaseEndingWith(String name);
 		List<Article> findByCategoryIgnoreCase(String category);
 		List<Article> findByLocationIgnoreCase(String location);
-		List<Article> findByAuthor(HappyUser author); 
+		List<Article> findByAuthor(HappyUser author);
+
+//		List<Article> sortArticlesByDate(List<Article> findByCategory); 
 	}
 	
 

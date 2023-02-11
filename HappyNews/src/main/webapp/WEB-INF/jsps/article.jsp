@@ -28,7 +28,7 @@
  <div class="article-text"> ${article.articleText}</div>
  </div>
  
-<!--  //VLAD TUTAJ TO SIE MA WYSWIETLAC JAK JESTES ADMINEM -->
+<!--  //if you are admin you have possibility to edit article -->
  <br>
 
  <c:choose>
@@ -41,8 +41,21 @@
 						
  	</c:otherwise>
 				</c:choose>
-			
+	<h2>similiar articles</h2>		
  
+<%--  <div id="articles">
+  <c:forEach var="article" items="${latestArticlesinCategory}">
+    <a href="<c:url value='/goToArticlePage/${article.articleId}'/>">${article.title}</a><br>
+  </c:forEach>
+</div> --%>
+ 
+ <div id="articles">
+  <c:forEach var="article" items="${latestArticlesinCategory}">
+    <c:if test="${article.articleId != articleId}">
+      <a href="<c:url value='/goToArticlePage/${article.articleId}'/>">${article.title}</a><br>
+    </c:if>
+  </c:forEach>
+</div>
  
  
 <!-- adding comment -->
