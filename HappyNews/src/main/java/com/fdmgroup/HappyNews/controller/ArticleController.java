@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import org.eclipse.jdt.internal.compiler.batch.Main;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -89,12 +90,21 @@ public class ArticleController {
 			LocalDateTime currentTime = LocalDateTime.now(); 
 			String publicationDate = currentTime.format(formatter);
 			
-			
+		 
+		 if(maincontroller.currentUserObject(model).getRole().equals("ROLE_ADMIN")) {
+				model.addAttribute("role",true);
+			}else {
+				model.addAttribute("role",false);
+			}
+		 
+		 
 			
 			if(maincontroller.currentUserObject(model).getRole().equals("ROLE_ADMIN")) {
 				Article newArticle = new Article(title, articleText, publicationDate, location, user, category);
 				newArticle.setStatus(true);
 				articleService.saveArticle(newArticle);
+				return "article-confirmation";
+				
 			}else {
 				
 				System.out.println("--------------------Else for user -------------------------------------------------------------");
@@ -104,13 +114,14 @@ public class ArticleController {
 				articleService.saveArticle(newArticle);
 				requestController.sendArticleForApproval( maincontroller.currentUserObject(model),newArticle);
 				//there shoud be notification to Admin
+				return "article-confirmation";
 			}
 	
 
 	
 		
 		
-		return "article-confirmation";
+		//return "article-confirmation";
 		
 	}
 

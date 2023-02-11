@@ -168,7 +168,7 @@ List<Message> allReceivedMessages = messageService.listAllReceivedMessages(userF
 			}
 		}
 		
-		//mainController.returnUserFromCurrentSession(model);
+		
 		if(userFromDatabase.getRole().equals("ROLE_ADMIN")) {
 			model.addAttribute("role",true);
 		}else {

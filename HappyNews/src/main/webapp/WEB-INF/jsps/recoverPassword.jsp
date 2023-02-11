@@ -13,10 +13,10 @@
 	<h2>Reset Password</h2>
 	<span style="color:red">${errorMessage}</span>
 	<form action="/recover-password" method="post">
-		Email: <input type="text" name="email"/>
-		Pet Name: <input type="password" name="petName"/>	
-		New Password: <input type="password" name="newPassword"/>
-		Confirm New Password: <input type="password" name="confirmNewPassword"/>
+		Email: <input type="text" name="email"/><br>
+		Pet Name: <input type="password" name="petName"/><br>	
+		New Password: <input type="password" name="newPassword"/><br>
+		Confirm New Password: <input type="password" name="confirmNewPassword"/><br>
 		<input type="submit"/>
 	</form>
 	

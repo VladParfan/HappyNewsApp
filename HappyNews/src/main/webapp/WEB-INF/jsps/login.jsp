@@ -13,11 +13,13 @@
 <body>
 
 	<jsp:include page="header.jsp" />
-<span style="color: red">${errorMessage}</span>
+
 
 	<form method="post" action="/process_login">
 		<h1>LOGIN</h1>
+		
 		<div class="input">
+		<span style="color: red">${errorMessage}</span>
 			<p>Email:</p>
 			<input type="email" name="username" id="username">
 		</div>

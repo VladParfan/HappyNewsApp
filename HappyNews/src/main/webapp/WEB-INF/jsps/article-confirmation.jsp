@@ -14,8 +14,16 @@
 
 <jsp:include page="header.jsp" />
 
+<c:choose>
+		<c:when test="${role == true}">
+	<h1>Your article is posted!</h1>
+	
+		</c:when>
+		<c:otherwise>
+					<h1>Your article has been sent to admin for approval</h1>
+					</c:otherwise>
+				</c:choose>
 
-<h1>your article has been sent</h1>
 
 
 <jsp:include page="footer.jsp" />
