@@ -29,10 +29,10 @@
       <img src="${pic1}" class="img-article" />
      <b><a  class="products1 colo" href="goToArticlePage/${article.articleId}">${article.title}</a></b><br>
       <small>
-      Date: ${article.publicationDate}<br>
-      Location: ${article.location}<br>
-      Author: ${article.author.username}<br>
-      Category: ${article.category}<br>
+      <b> Date: </b>${article.publicationDate}<br>
+      <b>Location:</b> ${article.location}<br>
+     <b> Author:</b> ${article.author.username}<br>
+
     
    </small>
    
