@@ -88,9 +88,10 @@ public class RequestController {
 		
 		populateInbox(model);
 		model.addAttribute("message", "Request Approved");
+		mainController.returnUserFromCurrentSession(model);
 		
-		return "inbox";
-		//return"redirect:/goToInbox";
+		//return "inbox";
+		return"redirect:/goToInbox";
 	}
 	
 	@GetMapping("/rejectRequest")
@@ -111,12 +112,12 @@ public class RequestController {
 		messageService.saveMessage(message);
 		requestService.deleteRequest(requestFromDatabase.getRequestId());		
 		articleService.deleteArticle(articleFromDatabase.getArticleId());
-		
+		mainController.returnUserFromCurrentSession(model);
 		populateInbox(model);		
 		model.addAttribute("message", "Request Rejected");
 		
-		return "inbox";
-		//return"redirect:/goToInbox";
+		
+		return"redirect:/goToInbox";
 	}
 	
 	public void populateInbox(ModelMap model) {
@@ -173,7 +174,7 @@ List<Message> allReceivedMessages = messageService.listAllReceivedMessages(userF
 		}else {
 			model.addAttribute("role",false);
 		}
-		
+		mainController.returnUserFromCurrentSession(model);
 		model.addAttribute("allRequests", allRequests);
 		model.addAttribute("allReceivedMessages", allUserMessages);
 		
@@ -185,7 +186,7 @@ List<Message> allReceivedMessages = messageService.listAllReceivedMessages(userF
 	@GetMapping("/deleteMessage")
 	public String deleteMessage(ModelMap model, @RequestParam int messageId) {
 		messageService.deleteMessage(messageId);
-		
+		mainController.returnUserFromCurrentSession(model);
 		populateInbox(model);
 		model.addAttribute("message", "Request Rejected");
 		

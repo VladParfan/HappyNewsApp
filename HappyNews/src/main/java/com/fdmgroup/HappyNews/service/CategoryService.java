@@ -14,8 +14,7 @@ public class CategoryService {
 	
 	@Autowired
 	private final ArticleRepository articleRepository;
-	
-	
+
 	public CategoryService(ArticleRepository articleRepository) {
 		super();
 		this.articleRepository = articleRepository;

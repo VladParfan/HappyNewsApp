@@ -16,6 +16,7 @@
 <h1>REGISTER</h1>
 <span style="color: red">${errorMessage}</span>
 
+
 <br>
 	<form action="/registration" method="post">
 		Username: <input type="text" name="username" required /><br>

@@ -65,7 +65,13 @@ public class AuthController {
 			model.addAttribute("errorMessage", "This user name already exists");
 			return "registration";
 		}
-	 
+	 System.out.println(userFromDatabase.getUsername()+"==========================================");
+	 HappyUser userFromDatabase1 = userDetailsService.findByUserEmail(happyUser.getEmail());
+	 if (userFromDatabase1.getEmail().equals(happyUser.getEmail()) ) {
+			model.addAttribute("errorMessage", "User with this email already exists");
+			return "registration";
+		}
+	 System.out.println(userFromDatabase1.getEmail()+"===================================================================");
 	 registrationService.register(happyUser);
 	 
 	 return "redirect:/login";
