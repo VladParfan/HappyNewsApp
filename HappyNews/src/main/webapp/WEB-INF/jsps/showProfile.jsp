@@ -26,11 +26,15 @@ This is your profile <br><br>
 			<b>Role:</b> ${user.role}<br><br>
 			<b>Pet name</b> ${user.petName}<br> <br>
 			
+			
+			
+			
 		</div>
 		<div class="div1">
 			<a class="button" href="/goEditProfilePage">Edit Profile</a> <br> <br> <br> 
 			<a class="button" href="/goChangePasswordPage">Change Password</a> <br><br> <br> 
 			<a class="button" href="/articles/${user.username}">Show my articles</a><br><br><br> 
+			<a class="button" href="/subscription">Subscription Categories</a><br><br><br> 
 		</div>
 	</div>
 	</div>

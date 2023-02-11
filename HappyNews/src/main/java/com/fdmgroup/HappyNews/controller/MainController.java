@@ -1,6 +1,7 @@
 package com.fdmgroup.HappyNews.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -13,6 +14,7 @@ import com.fdmgroup.HappyNews.model.Article;
 import com.fdmgroup.HappyNews.model.HappyUser;
 import com.fdmgroup.HappyNews.security.HappyUserDetails;
 import com.fdmgroup.HappyNews.service.ArticleService;
+import com.fdmgroup.HappyNews.service.CategoryService;
 import com.fdmgroup.HappyNews.service.HappyUserDetailsService;
 
 @Controller
@@ -23,6 +25,9 @@ public class MainController {
 	
 	@Autowired
 	private ArticleService articleService;
+	
+	@Autowired
+	private CategoryService categoryService ;
 	
 	
 	
@@ -57,6 +62,18 @@ public class MainController {
 		
 	    List<Article> topArticles = articleService.listTopSixArticles();
 	    model.addAttribute("topArticles", topArticles);
+	    String username = SecurityContextHolder.getContext().getAuthentication().getName();	
+		System.out.println("Username: " + username);	
+		if(username.equals("anonymousUser")) {
+			model.addAttribute("loggedIn", false);
+		} else {
+			model.addAttribute("loggedIn", true);
+			HappyUser user = happyUserDetailsService.findUserByName(username);
+			model.addAttribute("user", user);
+			Set<Article> recommendedArticles = categoryService.recommendedArticles(model);
+		    model.addAttribute("articlesByUserCategories", recommendedArticles);
+		}
+	    
 	   
 		return "index";
 	}

@@ -9,11 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fdmgroup.HappyNews.model.Article;
 import com.fdmgroup.HappyNews.model.Category;
-import com.fdmgroup.HappyNews.repository.ArticleRepository;
+
 import com.fdmgroup.HappyNews.service.ArticleService;
 import com.fdmgroup.HappyNews.service.CategoryService;
 
@@ -81,36 +82,34 @@ public class CategoryController {
 		return "index";
 	}
 	
-	  @GetMapping("/userCategories") 
-	  public String userCategories( ModelMap model)
-	 {  
-		  	// it should be in show profile controller  GetMapping showProfile;
-		  List<Category> categoriesByUser = categoryService.findAllCategoriesByUser(mainController.currentUserObject(model));
+	
+	  @GetMapping("/subscription") public String userCategories( ModelMap model)
+	  { 
+          List<Category> categoriesByUser = categoryService.findAllCategoriesByUser(mainController.currentUserObject(model));
 		  
 		  model.addAttribute("categoriesByUser", categoriesByUser);
-			 
-	   return "showProfile";
-      }
+	  return "subscription"; }
+	 
 	  
-	  @GetMapping("/addCategory") 
-	  public String addCategory(/*@RequestParam("category") String categoryName,*/ ModelMap model)
+	  @PostMapping("/addCategory") 
+	  public String addCategory(@RequestParam("category") String category, ModelMap model)
 	 {     
-		  String categoryName = "people"; // testing 
-		 System.out.println("---------------category name "+ categoryName);
+		  System.out.println("============ category " + category);
+		 System.out.println("---------------category name "+ category);
 		  mainController.returnUserFromCurrentSession(model);
 		  // set category from option in jsp
-		  categoryService.createAndSaveNewCategory(categoryName, mainController.currentUserObject(model), model);
-		  return null;	 
+		  categoryService.createAndSaveNewCategory(category, mainController.currentUserObject(model), model);
+		  return "redirect:/subscription";	 
 	 }
 	  
 	  @GetMapping("/deleteCategory") 
-	  public String deleteCategory(@RequestParam("category") String categoryName, ModelMap model)
+	  public String deleteCategory(@RequestParam("categoryName") String categoryName, ModelMap model)
 	 { 
 		  mainController.returnUserFromCurrentSession(model);
 		  //delete categoory from jsp button delete
 		  categoryService.deleteCategory(categoryName, mainController.currentUserObject(model),model);	 
 		  
-		  return null;
+		 return  "redirect:/subscription";
 	 }
 	  
 	  
