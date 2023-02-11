@@ -31,7 +31,7 @@ public class CategoryController {
 
 
 
-	@GetMapping("/goToCategory/{category}")
+	@GetMapping("/{category}")
 	public String goToCategory(ModelMap model,@PathVariable String category) {
 		mainController.returnUserFromCurrentSession(model);
 		

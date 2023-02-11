@@ -9,13 +9,12 @@
 <title>Insert title here</title>
 <c:url value="/css/style.css" var="jstlCss" />
 <link href="${jstlCss}" rel="stylesheet">
-<c:url value="/pictures/pic1.jpg" var="pic1" />
 </head>
 <body>
 
 <jsp:include page="header.jsp" />
 
-<h1 >${category}</h1>
+<h1 >${user.username}</h1>
 <div class="center" >
 <!-- ========Latest Articles================== -->
  	
@@ -23,7 +22,7 @@
  	<div class="articles-view">
  	
  	
-  <c:forEach var="article" items="${listOfArticles}" varStatus="status">
+  <c:forEach var="article" items="${listOfUserArticles}" varStatus="status">
     <div class="max" id="col${status.index % 3 + 1}">
       
       <img src="${pic1}" class="img-article" />
@@ -40,6 +39,9 @@
   </c:forEach>		
 </div>
 </div>
+
+
+
 
 
 

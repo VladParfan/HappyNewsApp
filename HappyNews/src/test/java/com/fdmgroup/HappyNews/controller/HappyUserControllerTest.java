@@ -22,6 +22,9 @@ public class HappyUserControllerTest {
 	@Mock
 	HappyUser happyUser;
 	private HappyUserRepository userRepository;
+	
+	
+	
 	@Autowired
 	private MockMvc mockMvc;
 	

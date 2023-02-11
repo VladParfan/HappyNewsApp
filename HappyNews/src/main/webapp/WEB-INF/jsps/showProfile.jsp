@@ -30,7 +30,7 @@ This is your profile <br><br>
 		<div class="div1">
 			<a class="button" href="/goEditProfilePage">Edit Profile</a> <br> <br> <br> 
 			<a class="button" href="/goChangePasswordPage">Change Password</a> <br><br> <br> 
-			<a class="button" href="/goShowArticlesOfUser/${user.username}">Show my articles</a><br><br><br> 
+			<a class="button" href="/articles/${user.username}">Show my articles</a><br><br><br> 
 		</div>
 	</div>
 	</div>

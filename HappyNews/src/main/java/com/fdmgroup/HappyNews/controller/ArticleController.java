@@ -183,7 +183,7 @@ public class ArticleController {
 			Filters filters = new Filters(category, location, author);
 			System.out.println("from filter.author we have " + filters.getAuthor());
 		
-			List<Article> filteredArticlesOld = articleService.findPostedarticles(articleService.findArticlesByName(searchedPhrase));
+			List<Article> filteredArticlesOld = articleService.findPostedarticles(articleService.findArticlesByTitle(searchedPhrase));
 			Set<Article> setArticles = new HashSet<>();
 			setArticles.addAll(filteredArticlesOld);
 			List<Article>filteredArticles = new ArrayList<>();
@@ -221,7 +221,7 @@ public class ArticleController {
 
 			// get products by name and subtract from them already booked on this termin
 		  
-			List<Article> foundArticlesOld = articleService.findPostedarticles(articleService.findArticlesByName(articleTitle));
+			List<Article> foundArticlesOld = articleService.findPostedarticles(articleService.findArticlesByTitle(articleTitle));
 			Set<Article> foundArticles = new HashSet<>();
 			//List<Article> foundArticles = articleService.findArticlesByName(articleTitle);
 				for(Article article: foundArticlesOld) {

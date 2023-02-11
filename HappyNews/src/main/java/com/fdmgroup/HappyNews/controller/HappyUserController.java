@@ -1,17 +1,21 @@
 package com.fdmgroup.HappyNews.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
+import com.fdmgroup.HappyNews.model.Article;
 import com.fdmgroup.HappyNews.model.HappyUser;
 import com.fdmgroup.HappyNews.repository.HappyUserRepository;
+import com.fdmgroup.HappyNews.service.ArticleService;
 import com.fdmgroup.HappyNews.service.HappyUserDetailsService;
 
 @Controller
@@ -23,6 +27,9 @@ public class HappyUserController {
 	@Autowired
 	private HappyUserDetailsService userDetailsService;
 	@Autowired
+	private ArticleService articleService;
+	
+	@Autowired
 	private MainController mainController;
 	
 	
@@ -32,20 +39,13 @@ public class HappyUserController {
 
 		mainController.returnUserFromCurrentSession(model);
 
-		
-		
-		
-		
 		return "showProfile";
 	}
 		
 	@GetMapping("/goEditProfilePage")
 	public String goToEditProfilePage(ModelMap model) {
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
-		
 		HappyUser user = userDetailsService.findByUsername(username);
-		
-
 		model.addAttribute("user", user);
 		
 		mainController.returnUserFromCurrentSession(model);
@@ -68,5 +68,20 @@ public class HappyUserController {
 		userDetailsService.saveUser(userFromDatabase);
 		return "showProfile";
 	}
+	
+	@GetMapping(value ="/articles/{username}")
+	public String goToUserArticles(ModelMap model, @PathVariable String username) {
+		mainController.returnUserFromCurrentSession(model);
+		System.out.println("-----------------------------" + username);
+		List<Article> listOfUserArticles = articleService.findArticleByUsername(model, username);
+		
+		model.addAttribute("listOfUserArticles", listOfUserArticles);
+		
+		System.out.println("-----------------------------");
+		System.out.println(listOfUserArticles );
+		return "showUserArticles";
+	}
+	
+	
 	
 }

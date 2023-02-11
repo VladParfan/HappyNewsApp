@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 
 import com.fdmgroup.HappyNews.model.Article;
@@ -26,7 +27,22 @@ public class ArticleService {
 	private HappyUserRepository happyUserRepository;
 	
 	
-	public List<Article> findArticlesByName(String name) {
+	public List<Article> findArticleByUsername(ModelMap model, String name){
+		Optional <HappyUser> optionalUser = happyUserRepository.findByUsername(name);
+		if (!optionalUser.isPresent()) {model.addAttribute("errorMessage", "no user");
+		return Collections.emptyList();
+		}
+		
+		 HappyUser user = optionalUser.get();
+		 List<Article> listOfUserArticles = articleRepository.findByAuthor(user);
+		
+		
+		return listOfUserArticles;
+		
+	}
+	
+	
+	public List<Article> findArticlesByTitle(String name) {
 		
 		
 		List<Article> foundArticles = articleRepository.findByTitleIgnoreCaseStartingWith(name);
@@ -162,13 +178,24 @@ public List<Article> subtractList(List<Article> l1, List<Article> l2){
 	
 	
 	public List<Article> listLatestSixArticles() {
-	    List<Article> articles = articleRepository.findLatestArticles();
-	    int size = articles.size();
-	    if (size > 6) {
-	      return articles.subList(0, 6);
+	    List<Article> articlesFromDatabase = articleRepository.findLatestArticles();
+	    //to refactor
+	    List<Article> latestArticles = new ArrayList<>();
+	    for(Article article: articlesFromDatabase) {
+	    	if (article.isStatus()) { 
+	    		latestArticles.add(article);	
+	    	}
+	    	
 	    }
-	    return articles;
+	    
+	    int size = latestArticles.size();
+	    if (size > 6) {
+	      return latestArticles.subList(0, 6);
+	    }
+	    return latestArticles;
 	  }
+	
+	
 	
 	public Optional<Article> findOptionalByArticleId(Integer articleId) {
 		Optional <Article> articleOpt = articleRepository.findById(articleId);
@@ -180,8 +207,21 @@ public List<Article> subtractList(List<Article> l1, List<Article> l2){
 	}
 	
 	public List<Article> listTopSixArticles() {
-	List<Article> TopArticles = articleRepository.findTopSixByOrderByNumberOfCommentsDesc();
-	return TopArticles.subList(0, Math.min(TopArticles.size(), 6));
+	List<Article> articlesFromDatabase = articleRepository.findTopSixByOrderByNumberOfCommentsDesc();
+	List<Article> topArticles = new ArrayList<>();
+	 for(Article article: articlesFromDatabase) {
+	    	if (article.isStatus()) { 
+	    		topArticles.add(article);	
+	    	}
+	    
+	    }
+	    
+	    int size = topArticles.size();
+	    if (size > 6) {
+	      return topArticles.subList(0, 6);
+	    }
+	
+	return topArticles;
 	}
 	
 	

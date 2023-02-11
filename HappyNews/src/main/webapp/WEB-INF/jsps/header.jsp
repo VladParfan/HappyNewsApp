@@ -46,12 +46,12 @@
 		</div>
 		<div class="menu-categories ">
 
-			<a href="/goToCategory/People">People</a> 
-			<a href="/toCulture">Culture</a> 
-			<a href="/toEnvironment">Environment</a> 
-			<a href="/toScience">Science</a>
-			<a href="/toEconomics">Economics</a>
-			 <a href="/toLifestyle">Lifestyle</a>
+			<a href="/People">People</a> 
+			<a href="/Culture">Culture</a> 
+			<a href="/Environment">Environment</a> 
+			<a href="/Science">Science</a>
+			<a href="/Economics">Economics</a>
+			 <a href="/Lifestyle">Lifestyle</a>
 			
 		</div>
 	</header>
