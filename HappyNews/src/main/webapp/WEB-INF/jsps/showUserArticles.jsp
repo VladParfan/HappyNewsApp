@@ -26,7 +26,7 @@
     <div class="max" id="col${status.index % 3 + 1}">
       
       <img src="${pic1}" class="img-article" />
-     <b><a  class="products1 colo" href="goToArticlePage/${article.articleId}">${article.title}</a></b><br>
+     <b><a  class="products1 colo" href="/goToArticlePage/${article.articleId}">${article.title}</a></b><br>
       <small>
       Date: ${article.publicationDate}<br>
       Location: ${article.location}<br>
