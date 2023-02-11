@@ -66,4 +66,9 @@ public void saveUserToDb(HappyUserDetails happyUsDet) {
      public void saveUser(HappyUser happyUser) {
  		userRepository.save(happyUser);
  	}
+
+	public Object findOptionalByUsername(String username) {
+		Optional<HappyUser> optHappyUser = userRepository.findByUsername(username);
+		return optHappyUser;
+	}
 }

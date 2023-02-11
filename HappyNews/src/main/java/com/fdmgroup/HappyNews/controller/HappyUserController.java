@@ -72,12 +72,9 @@ public class HappyUserController {
 	@GetMapping(value ="/articles/{username}")
 	public String goToUserArticles(ModelMap model, @PathVariable String username) {
 		mainController.returnUserFromCurrentSession(model);
-		System.out.println("-----------------------------" + username);
 		List<Article> listOfUserArticles = articleService.findArticleByUsername(model, username);
 		
 		model.addAttribute("listOfUserArticles", listOfUserArticles);
-		
-		System.out.println("-----------------------------");
 		System.out.println(listOfUserArticles );
 		return "showUserArticles";
 	}
