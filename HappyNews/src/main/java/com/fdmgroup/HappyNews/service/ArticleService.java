@@ -207,6 +207,10 @@ public class ArticleService {
 	public List<Article> findAllArticles() {
 		return articleRepository.findAll();
 	}
+	
+	
+	
+	
 
 	
 	

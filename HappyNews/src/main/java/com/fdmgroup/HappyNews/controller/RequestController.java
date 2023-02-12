@@ -55,16 +55,7 @@ public class RequestController {
 		this.articleService = articleService;
 	}
 
-	public void sendArticleForApproval(HappyUser user, Article article) {
-		System.out.println("----------------------------------------Sent article for approval working--------------------- ");
-		
-		String text = "User: " + user.getUsername() + " want to post his article:  " + article.getTitle() ;
-		
-		Request request = new Request(user, text, false, formattedCurrentDateTime(), article);
-		
-		requestService.saveRequest(request);
-		
-	}
+	
 	
 	@GetMapping("/confirmRequest")
 	public String confirmRequest(ModelMap model, @RequestParam int requestId) {
@@ -199,7 +190,16 @@ List<Message> allReceivedMessages = messageService.listAllReceivedMessages(userF
 	}
 			
 	
-	
+	public void sendArticleForApproval(HappyUser user, Article article) {
+		System.out.println("----------------------------------------Sent article for approval working--------------------- ");
+		
+		String text = "User: " + user.getUsername() + " want to post his article:  " + article.getTitle() ;
+		
+		Request request = new Request(user, text, false, formattedCurrentDateTime(), article);
+		
+		requestService.saveRequest(request);
+		
+	}
 	
 	
 	

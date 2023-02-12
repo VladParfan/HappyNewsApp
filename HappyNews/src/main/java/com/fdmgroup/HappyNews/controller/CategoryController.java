@@ -63,6 +63,7 @@ public class CategoryController {
 	
 	@GetMapping("/recomendation") 
 	public String recommendation (ModelMap model) {
+		mainController.returnUserFromCurrentSession(model);
 		Set<Article> articlesByuserCategories = new HashSet<>();
 		List<Category> allUserCategories = categoryService.findAllCategoriesByUser(mainController.currentUserObject(model));
 		List<Article> allArticleFromDB = articleService.findAllArticles();
@@ -85,6 +86,7 @@ public class CategoryController {
 	
 	  @GetMapping("/subscription") public String userCategories( ModelMap model)
 	  { 
+		  mainController.returnUserFromCurrentSession(model);
           List<Category> categoriesByUser = categoryService.findAllCategoriesByUser(mainController.currentUserObject(model));
 		  
 		  model.addAttribute("categoriesByUser", categoriesByUser);
