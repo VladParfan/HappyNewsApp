@@ -1,5 +1,7 @@
 package com.fdmgroup.HappyNews.model;
 
+import java.util.Objects;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -102,6 +104,25 @@ public class HappyUser {
 		return hashedPassword.toString();
 		
 				
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(email, id, password, petName, role, username);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		HappyUser other = (HappyUser) obj;
+		return Objects.equals(email, other.email) && Objects.equals(id, other.id)
+				&& Objects.equals(password, other.password) && Objects.equals(petName, other.petName)
+				&& Objects.equals(role, other.role) && Objects.equals(username, other.username);
 	}
 	
 	

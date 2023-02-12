@@ -79,6 +79,15 @@ public class MainControllerTest {
 	
 	@Test
 	@WithMockUser
+	public void test_goshowUserInfo_statusOk_returnLoginview() throws Exception {
+
+		mockMvc.perform(get("/showUserInfo")).andExpect(status().isOk()).andExpect(view().name("login"));
+	}
+	
+	
+	
+	@Test
+	@WithMockUser
 	public void test_goToFAQ_statusOk() throws Exception {
 
 		mockMvc.perform(get("/goToFAQ")).andExpect(status().isOk()).andExpect(view().name("FAQ"));
@@ -100,12 +109,25 @@ public class MainControllerTest {
 	
 	@Test
 	@WithMockUser
+	public void test_toContact_returnContact() throws Exception {
+
+		mockMvc.perform(get("/toPrivacyPolicy")).andExpect(status().isOk()).andExpect(view().name("privacy"));
+	}
+	
+	@Test
+	@WithMockUser
 	public void test_toAboutHappyNews() throws Exception {
 
 		mockMvc.perform(get("/toAboutHappyNews")).andExpect(status().isOk()).andExpect(view().name("aboutHappyNews"));
 	}
 	
-	
+	@Test
+	@WithMockUser
+	public void test_toContact() throws Exception {
+
+		mockMvc.perform(get("/toContact")).andExpect(status().isOk()).andExpect(view().name("contact"));
+	}
 }
+
 
 

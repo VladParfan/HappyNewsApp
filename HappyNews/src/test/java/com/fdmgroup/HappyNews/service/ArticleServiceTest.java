@@ -11,6 +11,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -96,5 +98,40 @@ public class ArticleServiceTest {
 		
 	}
 	
+	@Test
+	public void testFindPostedArticles() {
+	    List<Article> allArticles = Arrays.asList(new Article(), new Article(), new Article());
+	    List<Article> expectedListOfPostedArticles = Arrays.asList(new Article(), new Article());
+	    allArticles.get(0).setStatus(true);
+	    allArticles.get(1).setStatus(true);
+	    
+	   // when(mockArticleService.findPostedarticles(allArticles)).thenReturn(expectedListOfPostedArticles);
+	    
+	    //List<Article> actualListOfPostedArticles = mockArticleService.findPostedarticles(allArticles);
+	    
+	    
+	}
+	@Test
+	public void testListSixPublishedArticlesWithEmptyList() {
+		List<Article> listOfArticles = Collections.emptyList();
+		List<Article> result = mockArticleService.listSixPublishedArticles(listOfArticles);
+		//assertEquals(0, result.size());
+	}
 	
+//	@Test
+//	public void testListLatestSixArticles() {
+//		List<Article> articles = new ArrayList<>();
+//		for (int i = 0; i < 10; i++) {
+//		articles.add(new Article());
+//		}
+//		//awhen(mockArticleRepository.findLatestArticles()).thenReturn(articles);
+//		//when(mockArticleService.listSixPublishedArticles(articles)).thenReturn(articles.subList(0, 6));
+//
+//		List<Article> result = mockArticleService.listLatestSixArticles();
+//
+//		verify(mockArticleRepository, times(1)).findLatestArticles();
+//		verify(mockArticleService, times(1)).listSixPublishedArticles(result );
+//}
+
 }
+

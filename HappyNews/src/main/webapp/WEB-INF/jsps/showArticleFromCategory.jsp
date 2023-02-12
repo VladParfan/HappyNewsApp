@@ -31,7 +31,7 @@
       <small>
       <b> Date: </b>${article.publicationDate}<br>
       <b>Location:</b> ${article.location}<br>
-     <b> Author:</b> ${article.author.username}<br>
+     <b> Author:</b> <a href="/articles/${article.author.username}">${article.author.username}</a><br>
 
     
    </small>

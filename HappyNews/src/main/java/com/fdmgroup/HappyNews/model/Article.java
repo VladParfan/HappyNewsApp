@@ -2,6 +2,7 @@ package com.fdmgroup.HappyNews.model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -146,6 +147,30 @@ public class Article {
 		return "Article [articleId=" + articleId + ", title=" + title + ", articleText=" + articleText
 				+ ", publicationDate=" + publicationDate + ", location=" + location + ", author=" + author + ", status="
 				+ status + ", category=" + category + "]";
+	}
+
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(articleId, articleText, author, category, location, numberOfComments, publicationDate,
+				status, title);
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Article other = (Article) obj;
+		return articleId == other.articleId && Objects.equals(articleText, other.articleText)
+				&& Objects.equals(author, other.author) && Objects.equals(category, other.category)
+				&& Objects.equals(location, other.location) && numberOfComments == other.numberOfComments
+				&& Objects.equals(publicationDate, other.publicationDate) && status == other.status
+				&& Objects.equals(title, other.title);
 	}
 
 

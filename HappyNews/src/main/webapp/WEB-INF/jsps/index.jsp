@@ -51,7 +51,7 @@
 				<c:forEach var="article" items="${latestArticles}">
 					<div class="max" id="col${status.index % 3 + 1}">
 						 <img src="pictures/pic1.jpg" class="img-article" />
-							<b><a class="products1 colo no-deco " href="goToArticlePage/${article.articleId}">${article.title}</a></b><br>
+							<b><a class="products1 colo " href="goToArticlePage/${article.articleId}">${article.title}</a></b><br>
 						<small>
 							<b>Date: </b>${article.publicationDate}<br> 
 							<b>Location:</b>${article.location}<br>
@@ -98,7 +98,7 @@
   Your daily dose of happiness awaits you. <br> 
 
 <br><a class="big-font-button" href="/subscription"> Subscribe Happy News</a><br>
-  <i class=colo>and start spreading positivity.</i><br></p>
+ <small class=colo>and start spreading positivity.</small><br></p>
 </div>
   
 					</c:otherwise>
