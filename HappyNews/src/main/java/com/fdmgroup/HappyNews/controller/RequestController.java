@@ -18,6 +18,7 @@ import com.fdmgroup.HappyNews.model.HappyUser;
 import com.fdmgroup.HappyNews.model.Message;
 import com.fdmgroup.HappyNews.model.Request;
 import com.fdmgroup.HappyNews.service.ArticleService;
+import com.fdmgroup.HappyNews.service.CategoryService;
 import com.fdmgroup.HappyNews.service.HappyUserDetailsService;
 import com.fdmgroup.HappyNews.service.MessageService;
 import com.fdmgroup.HappyNews.service.RequestService;
@@ -37,6 +38,9 @@ public class RequestController {
 	
 	@Autowired
 	private MessageService messageService;
+	
+	@Autowired
+	private CategoryService categoryService;
 	
 	
 	
@@ -85,6 +89,7 @@ public class RequestController {
 		
 		articleService.saveArticle(articleFromDatabase);
 		requestService.deleteRequest(requestFromDatabase.getRequestId());
+		categoryService.sentMessageAterAddingTheArticle(articleFromDatabase);
 		
 		populateInbox(model);
 		model.addAttribute("message", "Request Approved");

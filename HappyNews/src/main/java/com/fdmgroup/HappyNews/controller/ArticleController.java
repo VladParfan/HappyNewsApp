@@ -110,6 +110,8 @@ public class ArticleController {
 				Article newArticle = new Article(title, articleText, publicationDate, location, user, category);
 				newArticle.setStatus(true);
 				articleService.saveArticle(newArticle);
+				categoryService.sentMessageAterAddingTheArticle(newArticle);
+				requestController.populateInbox(model);
 				return "article-confirmation";
 				
 			}else {

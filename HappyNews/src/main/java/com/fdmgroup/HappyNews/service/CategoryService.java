@@ -1,5 +1,7 @@
 package com.fdmgroup.HappyNews.service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,6 +15,7 @@ import com.fdmgroup.HappyNews.controller.MainController;
 import com.fdmgroup.HappyNews.model.Article;
 import com.fdmgroup.HappyNews.model.Category;
 import com.fdmgroup.HappyNews.model.HappyUser;
+import com.fdmgroup.HappyNews.model.Message;
 import com.fdmgroup.HappyNews.repository.ArticleRepository;
 import com.fdmgroup.HappyNews.repository.CategoryRepository;
 
@@ -24,16 +27,27 @@ public class CategoryService {
 	private final ArticleRepository articleRepository;
 	
 	@Autowired
+	private final ArticleService articleService;
+	
+	
+	@Autowired
 	private final CategoryRepository categoryRepo;
 	
 	@Autowired 
 	private final HappyUserDetailsService happyUserDetailsService;
+	
+	@Autowired 
+	private  MessageService messageService;
+	
+	
 
-	public CategoryService(ArticleRepository articleRepository,CategoryRepository categoryRepo,HappyUserDetailsService happyUserDetailsService) {
+	public CategoryService(ArticleRepository articleRepository,CategoryRepository categoryRepo,HappyUserDetailsService happyUserDetailsService,ArticleService articleService,MessageService messageService) {
 		super();
 		this.articleRepository = articleRepository;
 		this.categoryRepo = categoryRepo;
 		this.happyUserDetailsService = happyUserDetailsService;
+		this.articleService = articleService;
+	    this.messageService= messageService;
 	}
 
 
@@ -91,7 +105,7 @@ public class CategoryService {
 		
 		
 		public Set<Article> recommendedArticles(ModelMap model){
-			List<Article> allArticles= articleRepository.findAll();
+			List<Article> allArticles= articleService.findPostedarticles(articleRepository.findAll());
 			List<Category> currentUserCategories = findAllCategoriesByUser(currentUserObject(model));
 			Set<Article> articlesByUserCategories = new HashSet<>();
 			
@@ -114,6 +128,33 @@ public class CategoryService {
 			
 			
 		}
+		
+		public List<Category> allCategporiesFromDB(){ 
+			return categoryRepo.findAll();
+		}
+		
+		
+		public void sentMessageAterAddingTheArticle(Article article) {
+			for(Category category: allCategporiesFromDB()) {
+				if(category.getName().toLowerCase().equals(article.getCategory().toLowerCase())) {
+					if(!(article.getAuthor().getId() == category.getUser().getId())) {
+						String text = "New article from " + article.getCategory() + " is added! You can read it now !";
+						Message message = new Message(category.getUser(), text, false, formattedCurrentDateTime());
+						messageService.saveMessage(message);
+					}
+					
+				}
+			}
+		}
+		public LocalDateTime formattedCurrentDateTime() {
+			LocalDateTime currentTime = LocalDateTime.now();
+			DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+			String formattedCurrentTimeString = currentTime.format(dateTimeFormatter);
+			
+			return LocalDateTime.parse(formattedCurrentTimeString, dateTimeFormatter);
+		}
+		
+		
 	}
 	
 
