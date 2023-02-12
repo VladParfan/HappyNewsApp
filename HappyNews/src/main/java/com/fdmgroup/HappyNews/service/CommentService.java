@@ -24,6 +24,12 @@ public class CommentService {
 		
 	}
 	
+	
+	public void deleteComment (int commentId) {
+		commentRepository.deleteById(commentId);
+		
+	}
+	
 	/*public void deleteComment (int commentId) {
 		System.out.println("we are in the service====================================================" + commentId);
 		Optional<Comment> optinal =commentRepository.findById(commentId);

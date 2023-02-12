@@ -93,8 +93,12 @@
 					</c:when>
 					<c:otherwise>
 						 <div class="sub in-center">
-  Stay positive and stay informed with Happy News! <br>Subscribe now to get daily updates on the good news happening around the world. <br>Your daily dose of happiness awaits you. <br> Click the 'Go To Subscribe' button to start spreading positivity.<br>
-<br><a class="big-font-button" href="/subscription"> Subscribe Happy News</a>
+ <p class=colo> Stay positive and stay informed with <b>Happy News! </b>
+  <br>Subscribe now to get daily updates on the good news happening around the world. <br>
+  Your daily dose of happiness awaits you. <br> 
+
+<br><a class="big-font-button" href="/subscription"> Subscribe Happy News</a><br>
+  <i class=colo>and start spreading positivity.</i><br></p>
 </div>
   
 					</c:otherwise>
@@ -104,6 +108,8 @@
 
 </div>
 		<!-- ========end of content================== -->
+		<p><p>
+		
 	<a class="colo center" href="/">Go to Homepage</a>
 	<br>
 	<br>

@@ -92,11 +92,8 @@ Text:<input type="text" name="commentText" placeholder="Text" required /><br>
   <!-- Loop through each comment -->
   <c:if test="${comment.parentComment == null}">
     <!-- Check if the comment is not a reply -->
-    <br>
-    --------------------------------------------------------------------------
-    <br>
+   <p class="colo"> ----------------------------------------------------------------------------------------------------------------</p>
     <table>
-      
       <tr>
         <td><b>${comment.commentator.username}</b></td>
         <td class="small-text">${comment.publicationTime}</td>
