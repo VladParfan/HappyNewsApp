@@ -111,7 +111,7 @@ public class CategoryService {
 			
 			for(Article article: allArticles) {
 				for(Category category: currentUserCategories) {
-					if(article.getCategory().toLowerCase().equals(category.getName().toLowerCase())){
+					if(article.getCategory().toLowerCase().equals(category.getName().toLowerCase()) && articlesByUserCategories.size()< 6){
 						articlesByUserCategories.add(article);
 				}
 			}
