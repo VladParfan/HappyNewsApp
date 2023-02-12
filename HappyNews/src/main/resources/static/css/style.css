@@ -2,6 +2,18 @@
 @charset "ISO-8859-1";
 
 
+
+
+.flex{
+	display: flex;
+    justify-content: space-between;
+     width: 500px;
+     margin-right:auto;
+     margin-left: auto;
+	
+}
+
+
 .button {
   background-color: #41d7dd;
   color: white;
@@ -10,6 +22,28 @@
   padding: 8px 15px;
   cursor: pointer;
 }
+
+.button:hover {
+  background-color: #eac700;
+  color: white;
+  cursor: pointer;
+}
+
+.button2 {
+  background-color: #eac700;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 15px;
+  cursor: pointer;
+}
+
+.button2:hover {
+  background-color: #41d7dd;
+  color: white;
+  cursor: pointer;
+}
+
 
 input[type="submit"] {
     background-color: #41d7dd;
@@ -21,16 +55,27 @@ input[type="submit"] {
 }
 
 
-
 body {
   font-family: 'Lato', sans-serif;
   max-width: 1080px;
   margin: 0 auto;
 }
- a {
+a {
+	text-decoration: underline;
+	text-decoration-color: #808080;
+	/* text-decoration-style: solid;  */
+	color: BLACK;
+}
+
+a:hover {
+	
+  color: #41d7dd;
+  text-decoration: none;
+  cursor: pointer;
+}
+.no-deco{
 	text-decoration: none;
-	color: black;
-} 
+}
 
 h1 {
 	text-align: center;
@@ -40,7 +85,10 @@ h1 {
 	color: #808080;
 	
 }
+.enter2{
+	text-align: center;
 
+}
 .center {
 	display: flex;
 	justify-content: center
@@ -86,7 +134,7 @@ h1 {
 
 
     .articles-view {
-    display: flex;
+     display: flex;
     flex-wrap: wrap;
     width: 80%;
     

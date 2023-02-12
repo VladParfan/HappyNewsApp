@@ -15,10 +15,10 @@
 <jsp:include page="header.jsp" />
 
 <div>
-<h2>Hello ${user.username} </h2>
-This is your profile <br><br>
+<h2 class="center">Hello ${user.username} </h2>
+<p class="center">This is your profile </p><br><br>
 
-	<div class="users">
+	<div class="flex">
 		<div class="div1">
 			
 			<b>Username:</b> ${user.username}<br><br>
@@ -31,18 +31,18 @@ This is your profile <br><br>
 			
 		</div>
 		<div class="div1">
-			<a class="button" href="/goEditProfilePage">Edit Profile</a> <br> <br> <br> 
-			<a class="button" href="/goChangePasswordPage">Change Password</a> <br><br> <br> 
-			<a class="button" href="/articles/${user.username}">Show my articles</a><br><br><br> 
-			<a class="button" href="/subscription">Subscription Categories</a><br><br><br> 
+			<a class="button no-deco" href="/goEditProfilePage">Edit Profile</a> <br> <br> <br> 
+			<a class="button no-deco" href="/goChangePasswordPage">Change Password</a> <br><br> <br> 
+			<a class="button no-deco" href="/articles/${user.username}">Show my articles</a><br><br><br> 
+			<a class="button2 no-deco" href="/subscription">Your Subscription </a><br><br><br> 
 		</div>
 	</div>
 	</div>
 
-	<a href="/" ><small class=colo>Go to homepage</small></a>
+	<a href="/" ><small class="colo center">Go to homepage</small></a>
 
 
-
+<br><br>
 <jsp:include page="footer.jsp" />
 
 

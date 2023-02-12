@@ -19,10 +19,10 @@
 <div class= "article-content">
 <h2 class="article-title">${article.title} </h2>
 <div class="article-details">
-    <b> Author:</b> ${article.author.username}<br>
+    <b>Author:</b> <a class="colo" href="/articles/${article.author.username}">${article.author.username}</a><br>
       <b>Date:</b> ${article.publicationDate}<br>
       <b>Location:</b> ${article.location}<br>
-      <b>Category:</b> <a  href="/${article.category}">${article.category}</a> <br>
+      <b>Category:</b> <a class="colo"  href="/${article.category}">${article.category}</a> <br>
  </div>
  <div class="article-text"> ${article.articleText}</div>
  </div>
@@ -33,14 +33,14 @@
  <c:choose>
 	<c:when test="${loggedIn == true && user.role == 'ROLE_ADMIN' }">
 		
-						<a href="/goToEditArticle/${article.articleId}"><i>Edit article</i></a>
+						<a class="colo" href="/goToEditArticle/${article.articleId}"><i>Edit article</i></a>
 						
 					</c:when>
 					<c:otherwise>
 						
  	</c:otherwise>
 				</c:choose>
-	<h2>similiar articles</h2>		
+	<h2>Related articles</h2>		
  
 <%--  <div id="articles">
   <c:forEach var="article" items="${latestArticlesinCategory}">
@@ -51,7 +51,7 @@
  <div id="articles">
   <c:forEach var="article" items="${latestArticlesinCategory}">
     <c:if test="${article.articleId != articleId}">
-      <a href="<c:url value='/goToArticlePage/${article.articleId}'/>">${article.title}</a><br>
+      <a class="colo" href="<c:url value='/goToArticlePage/${article.articleId}'/>">${article.title}</a><br>
     </c:if>
   </c:forEach>
 </div>

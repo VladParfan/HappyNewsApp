@@ -38,11 +38,12 @@ Category:<select name="category" value="${article.category}">
 </form>
 
 <form action="/deleteArticle" method="get">
-
 <input type="hidden" name=articleId value="${article.articleId}"/>
-<input type="submit" value="delete" />
-
+<input type="submit" value="Delete" />
 </form>
+
+
+<br><br>
 <jsp:include page="footer.jsp" />
 
 

@@ -21,12 +21,10 @@
 			<form action="/deleteCategory" method="get" >
 			<input type="hidden" name="categoryName" value="${category.name}">
 			<br>
-			<input type="submit" value="Delete" />
+			<input class=button type="submit" value="Delete" />
 			</form>
 			</c:forEach><br> <br>
-			
-			
-			
+					
 			
 			<form action="/addCategory" method="post" >
 		Category:<select name="category" required><br> 	
@@ -38,13 +36,11 @@
 				<option value="lifestyle">lifestyle</option>
 				</select>
 
-			<input type="submit" value="Add to your subscription" />
-			
-			
+			<input class=button2 type="submit" value="Add to your subscription" />
+		
 	</form>
-
-
-
+<br>
+<br>
 <jsp:include page="footer.jsp" />
 
 
