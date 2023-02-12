@@ -13,6 +13,7 @@
 </head>
 <body>
 	<jsp:include page="header.jsp" />
+	<br>
 	<jsp:include page="searchbar.jsp" />
 
 	<br></br>
@@ -91,7 +92,11 @@
 						</div>
 					</c:when>
 					<c:otherwise>
-						<a class="center" href="/subscription">Go To Subscribe</a>
+						 <div class="sub in-center">
+  Stay positive and stay informed with Happy News! <br>Subscribe now to get daily updates on the good news happening around the world. <br>Your daily dose of happiness awaits you. <br> Click the 'Go To Subscribe' button to start spreading positivity.<br>
+<br><a class="big-font-button" href="/subscription"> Subscribe Happy News</a>
+</div>
+  
 					</c:otherwise>
 				</c:choose>
 			</c:when>
@@ -99,7 +104,7 @@
 
 </div>
 		<!-- ========end of content================== -->
-	
+	<a class="colo center" href="/">Go to Homepage</a>
 	<br>
 	<br>
 

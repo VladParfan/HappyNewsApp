@@ -14,20 +14,28 @@
 
 <jsp:include page="header.jsp" />
 
-<h1>Subscription Categories</h1> <br>
-								<br>
-			<c:forEach var="category" items="${categoriesByUser}">
-			${category.name}
+<h1>Your Subscription </h1> <br><br>
+			<div class=center2>					
+			<div class= center >	
+			<div >					
+			You subscribe  the following categories:<br><br>
+			<c:forEach  var="category" items="${categoriesByUser}">
+			<div class=center>
+			<b>${category.name}&nbsp;&nbsp;   </b>
 			<form action="/deleteCategory" method="get" >
 			<input type="hidden" name="categoryName" value="${category.name}">
-			<br>
 			<input class=button type="submit" value="Delete" />
-			</form>
-			</c:forEach><br> <br>
-					
 			
+			</form>
+			</div>
+			<br>
+			</c:forEach><br> <br>
+			</div>
+			</div>
+			<div>	
+			<h2 class=center> Subscribe more </h2>
 			<form action="/addCategory" method="post" >
-		Category:<select name="category" required><br> 	
+		Category: <select name="category" required><br> 	
 				<option value="people">people</option>
 				<option value="culture">culture</option>
 				<option value="environment">environment</option>
@@ -35,10 +43,12 @@
 				<option value="economics">economics</option>
 				<option value="lifestyle">lifestyle</option>
 				</select>
-
+<p>   </p>
 			<input class=button2 type="submit" value="Add to your subscription" />
 		
 	</form>
+	</div>	
+	</div>
 <br>
 <br>
 <jsp:include page="footer.jsp" />

@@ -80,9 +80,8 @@
 	<br><br>	
 	<br>
 	<div class="links-in-messages">
-		<a href="/goSentMessages">Sent Messages</a>  
-		<a href="/showUsers">Write a message</a>   
-		<a href="/">Go to Homepage</a>
+		
+		<a class="colo center" href="/">Go to Homepage</a>
 	</div>
 	<br>
 	</div>

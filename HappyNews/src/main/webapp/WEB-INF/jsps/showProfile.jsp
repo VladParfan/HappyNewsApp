@@ -34,7 +34,7 @@
 			<a class="button no-deco" href="/goEditProfilePage">Edit Profile</a> <br> <br> <br> 
 			<a class="button no-deco" href="/goChangePasswordPage">Change Password</a> <br><br> <br> 
 			<a class="button no-deco" href="/articles/${user.username}">Show my articles</a><br><br><br> 
-			<a class="button2 no-deco" href="/subscription">Your Subscription </a><br><br><br> 
+			<a class="button2 no-deco" href="/subscription">My Subscriptions </a><br><br><br> 
 		</div>
 	</div>
 	</div>

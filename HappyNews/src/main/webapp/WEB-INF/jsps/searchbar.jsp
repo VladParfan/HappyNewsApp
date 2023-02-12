@@ -25,7 +25,7 @@
 	<div class="center">
 		<form action="/goToSearchingPage" method="get">
 			<input class="search-input" type="text" name="articleTitle" placeholder="Search an article" value = "${searchedPhrase}">
-			<input class="submit-button" type="submit" value="Search">
+			<input class=button type="submit" value="Search">
 		</form>
 	</div>
 
