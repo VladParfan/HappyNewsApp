@@ -101,7 +101,7 @@ Text:<input type="text" name="commentText" placeholder="Text" required /><br>
         <td><b>${comment.commentator.username}</b></td>
         <td class="small-text">${comment.publicationTime}</td>
         <td>${comment.commentText}</td>
-        <td>
+        <td><%-- <form action="/deleteComment" method="get"><input type="hidden" name=commentId value="${comment.commentId}"/><input type="hidden" name="articleId" value="${article.articleId}"><input type="submit" value="Delete" /></form> --%>
           <!-- Add reply form -->
           <form action="/addCommentReply" method="post">
             <input type="hidden" name="commentator" value="${user.username}">
