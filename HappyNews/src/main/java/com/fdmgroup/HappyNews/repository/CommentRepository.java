@@ -11,7 +11,8 @@ import com.fdmgroup.HappyNews.model.Comment;
 public interface CommentRepository extends JpaRepository<Comment, Integer> {
 
 List<Comment> findByArticle (Article article);
-
+//List<Comment> findByParentComment(Comment parentCommnet);
+ 
 	
 	
 }
