@@ -13,7 +13,7 @@ public class HappyUser {
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
+	private Integer id;
 	@Column(name="username")
 	private String username;
 	@Column(name="email")
@@ -50,10 +50,10 @@ public class HappyUser {
 	}
 	
 	
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getUsername() {
