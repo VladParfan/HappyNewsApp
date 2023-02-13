@@ -31,7 +31,7 @@
 				<option value="culture">culture</option>
 				<option value="environment">environment</option>
 				<option value="science">science</option>
-				<option value="science">economics</option>
+				<option value="economics">economics</option>
 				<option value="lifestyle">lifestyle</option>
 				</select>
 			<input type="hidden" name="author" value="${user.username}"><br>
