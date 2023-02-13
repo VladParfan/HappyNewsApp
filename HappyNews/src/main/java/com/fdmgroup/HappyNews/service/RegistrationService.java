@@ -20,7 +20,7 @@ public class RegistrationService {
 	public RegistrationService(HappyUserRepository userRepository) {
 		super();
 		this.userRepository = userRepository;
-	}
+	} 
 	
 	@Transactional
 	public void register(HappyUser happyUser) {
