@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.ui.ModelMap;
 
 import com.fdmgroup.HappyNews.model.Article;
 import com.fdmgroup.HappyNews.model.Category;
@@ -42,6 +43,9 @@ public class CategoryServiceTest {
 	@Mock
 	Article article;
 	
+	@Mock
+	ModelMap model;
+	
 	
 	
 	@Test 
@@ -73,9 +77,9 @@ public class CategoryServiceTest {
 	@Test 
 	public void test_deleteCategoryMethodOfCategoryService_callsDeleteCategoryRepository() {
 		
-		mockRepository.findAllCategoriesByUser(mockUser);
+		service.deleteCategory("String", mockUser, model);
 		
-		verify(mockRepository, times(1)).findAllCategoriesByUser(mockUser);
+		verify(mockRepository, times(1)).deleteById(mockCategory.getCategoryId());
 	}
 	
 	

@@ -45,14 +45,21 @@ public UserDetails loadUserByEmailForPasswordChange(String email) throws Usernam
 }
 
 public HappyUser findByUserEmail(String email) {
-	return userRepository.findByEmail(email).get();
+	if(userRepository.findByEmail(email).isPresent()) {
+		return userRepository.findByEmail(email).get();	
+	}
+	return new HappyUser("name","name","name");
+	
 }
 
 public HappyUser findByUsername(String name) {
-	return userRepository.findByUsername(name).get();
-}
+	if(userRepository.findByUsername(name).isPresent()) {
+		return userRepository.findByUsername(name).get();	
+	}
+	return new HappyUser("name","name","name");
+} 
 
-
+ 
 
 public void saveUserToDb(HappyUserDetails happyUsDet) {
 	userRepository.save(happyUsDet.getHappyUser());
