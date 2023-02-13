@@ -236,7 +236,7 @@ public class ArticleController {
 				//List<Article> listOfTopProducts = showProductService.listTopSixProducts();
 				//model.addAttribute("topProducts", listOfTopProducts.stream().limit(6).toList());
 				maincontroller.returnUserFromCurrentSession(model);
-				return "index";
+				return "redirect:/";
 			}
 
 			// get products by name and subtract from them already booked on this termin
