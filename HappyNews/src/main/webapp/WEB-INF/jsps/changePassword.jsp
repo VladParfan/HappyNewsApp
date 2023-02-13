@@ -14,11 +14,12 @@
 	<span style="color:red">${errorMessage}</span>
 	<form action="/change-password" method="post">
 		<%-- <input type="hidden" name="username" value="${user.username}"/>	 --%>
-		Current Password: <input type="password" name="currentPassword"/>
-		New Password: <input type="password" name="newPassword"/>
-		Confirm New Password: <input type="password" name="confirmNewPassword"/>
+		Current Password: <input type="password" name="currentPassword"/><br>
+		New Password: <input type="password" name="newPassword"/><br>
+		Confirm New Password: <input type="password" name="confirmNewPassword"/><br>
 		<input type="submit"/>
-		<a href="/">Go to Homepage</a>
+		<br><br><a href="/">Go to Homepage</a>
+		
 	</form>
 	
 	<jsp:include page="footer.jsp" />
