@@ -18,7 +18,13 @@
 	<form action="/addArticle" method="post" >
 		Title:<input type="text" name="title" placeholder="Title" required /><br>
 		Text:<input type="text" name="articleText" placeholder="Text" required /><br>
-		Location:<input type="text" name="location"	placeholder="article Text" required /><br> 
+		Location:<select class="select-class" name="location">
+					<%-- <option value="${filters.location }" selected="selected">${filters.location }</option> --%>
+
+					<option value="world">world</option>
+					<option value="poland">poland</option>
+					<option value="ukraine">ukraine</option>
+					</select>
 		
 		Category:<select name="category" required><br> 	
 				<option value="people">people</option>
