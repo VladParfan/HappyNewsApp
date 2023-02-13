@@ -54,9 +54,9 @@ public class CategoryService {
 	public List<Article> findArticleByCategory(String category) {
 			List<Article> findByCategory = articleRepository.findByCategoryIgnoreCase(category);
 		return findByCategory;
-	}
+	}  
 	
-	
+	 
 	
 	
 	public List<Category> findAllCategoriesByUser(HappyUser user ){
@@ -102,7 +102,7 @@ public class CategoryService {
 			
 			return false;
 		}
-		
+		 
 		
 		public Set<Article> recommendedArticles(ModelMap model){
 			List<Article> allArticles= articleService.findPostedarticles(articleRepository.findAll());

@@ -2,6 +2,7 @@ package com.fdmgroup.HappyNews.service;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,13 +16,15 @@ import com.fdmgroup.HappyNews.security.HappyUserDetails;
 
 @Service
 public class HappyUserDetailsService implements UserDetailsService{
+	
    private final HappyUserRepository userRepository;
 
+   @Autowired
 public HappyUserDetailsService(HappyUserRepository userRepository) {
 	super();
 	this.userRepository = userRepository;
 }
-
+ 
 @Override
 public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 	Optional<HappyUser> happyUserOptional = userRepository.findByEmail(email);
@@ -42,14 +45,21 @@ public UserDetails loadUserByEmailForPasswordChange(String email) throws Usernam
 }
 
 public HappyUser findByUserEmail(String email) {
-	return userRepository.findByEmail(email).get();
+	if(userRepository.findByEmail(email).isPresent()) {
+		return userRepository.findByEmail(email).get();	
+	}
+	return new HappyUser("name","name","name");
+	
 }
 
 public HappyUser findByUsername(String name) {
-	return userRepository.findByUsername(name).get();
-}
+	if(userRepository.findByUsername(name).isPresent()) {
+		return userRepository.findByUsername(name).get();	
+	}
+	return new HappyUser("name","name","name");
+} 
 
-
+ 
 
 public void saveUserToDb(HappyUserDetails happyUsDet) {
 	userRepository.save(happyUsDet.getHappyUser());

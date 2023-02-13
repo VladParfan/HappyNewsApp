@@ -51,7 +51,7 @@ public class AuthController {
 		return "login";
 	}
 	
-	
+	 
 	@GetMapping("/registration")
 	public String registrationPage(@ModelAttribute("happyUser") HappyUser happyUser) {
 		return "registration";
@@ -61,17 +61,28 @@ public class AuthController {
 	public String performRegistration(@ModelAttribute("happyUser") HappyUser happyUser,ModelMap model) {
 	 
 	 HappyUser userFromDatabase = userDetailsService.findUserByName(happyUser.getUsername());
-	 if (userFromDatabase.getUsername().equals(happyUser.getUsername()) || happyUser.getUsername().equals("anonymousUser")) {
-			model.addAttribute("errorMessage", "This user name already exists");
-			return "registration";
-		}
-	 System.out.println(userFromDatabase.getUsername()+"==========================================");
-	 HappyUser userFromDatabase1 = userDetailsService.findByUserEmail(happyUser.getEmail());
-	 if (userFromDatabase1.getEmail().equals(happyUser.getEmail()) ) {
-			model.addAttribute("errorMessage", "User with this email already exists");
-			return "registration";
-		}
-	 System.out.println(userFromDatabase1.getEmail()+"===================================================================");
+	 if(userFromDatabase == null) {
+		
+	 }else {
+		 if ((userFromDatabase.getUsername().equals(happyUser.getUsername()) || happyUser.getUsername().equals("anonymousUser"))) {
+				model.addAttribute("errorMessage", "This user name already exists");
+				return "registration";
+			}
+	 }
+		 System.out.println(userFromDatabase.getUsername()+"==========================================");
+		 HappyUser userFromDatabase1 = userDetailsService.findByUserEmail(happyUser.getEmail());
+		 if(userFromDatabase1 == null) {
+			 
+		 }else {
+			 if (userFromDatabase1.getEmail().equals(happyUser.getEmail()) ) {
+				 
+				 
+					model.addAttribute("errorMessage", "User with this email already exists");
+					return "registration";
+				}  
+		 } 
+				
+
 	 registrationService.register(happyUser);
 	 
 	 return "redirect:/login";
